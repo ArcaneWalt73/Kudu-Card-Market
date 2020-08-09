@@ -1,0 +1,19 @@
+body
+{
+    background-color:white;
+}
+
+#history_table
+{
+    width: 100%;
+    border
+}
+
+table,th,td 
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+    text-align: center;
+
+}
