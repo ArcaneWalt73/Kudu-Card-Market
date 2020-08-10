@@ -3,7 +3,7 @@
 var phpUrl = 'https://lamp.ms.wits.ac.za/home/s1965919/Project/getHistoryWeb.php';
 
 //get username set in the login page
-var username = document.cookie.split("=")[1];
+var username = 694569;//document.cookie.split("=")[1];
 
 $(document).ready
 (
@@ -12,6 +12,14 @@ $(document).ready
     //make a post request for the user's purchase history
     function()
     {
+        //handle onclick for back button
+        var backBtn = document.getElementById("back_btn");
+        backBtn.onclick = function()
+        {
+            var parent_url = "";
+            window.open(parent_url,"_self"); //go back to parent page  
+        }
+
         $.post
         (
             phpUrl,
