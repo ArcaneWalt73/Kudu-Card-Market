@@ -9,7 +9,8 @@
 	
 	if(isset($_POST['studentNo']))
 	{	
-		$studentNo = $_POST["studentNo"];
+		//$studentNo = $_POST["studentNo"];
+                $studentNo = $_SESSION['login_user'];
 		if ($pResult = mysqli_query($link, "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';")) {
 		$length = 0;
 		while ($row = $pResult->fetch_assoc()) {
