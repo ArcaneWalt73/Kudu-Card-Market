@@ -9,6 +9,7 @@
 	$output1 = array();
 	$output2 = array();
 
+
 function getUserHistory($link, $studentNo) {
 	$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
 	if ($pResult = mysqli_query($link, $sql)) {
@@ -37,6 +38,10 @@ function getUserHistory($link, $studentNo) {
 	else
 		return null;
 }
+
+	
+	
+
 		
 	$studentNo = $_SESSION['login_user'];
 	if ($pResult = mysqli_query($link, "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';")) {
