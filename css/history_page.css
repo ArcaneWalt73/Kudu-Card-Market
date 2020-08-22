@@ -60,3 +60,7 @@ table,th,td
 	float: right;
 	visibility: hidden;
 }
+
+.item-title {
+	background-color: blue;
+}

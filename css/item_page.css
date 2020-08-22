@@ -1,0 +1,51 @@
+
+body
+{
+    background-color:white;
+}
+
+#name_div
+{
+    background-color: #1e376c;
+    text-align: left;
+    height: 25%;
+    width: 100%;
+    padding: 20px;   
+    color: white;
+
+    margin-bottom: 0px;
+}
+
+#price_div
+{	
+	background-color: rgb(199, 168, 32);
+	text-align = center;
+	width = 100%;
+	padding: 5px;
+	padding-left: 20px;
+	color: #1e376c;
+	
+	
+}
+
+#image
+{
+	display: block;
+	margin: auto;
+}
+
+#image_div
+{
+	text-align = center;
+	padding = 20px;
+	background-color: #ffffff;
+	margin: 20px;
+	display: block;
+}
+
+.container
+{
+	text-align: center;
+	padding: 30px;
+}
+

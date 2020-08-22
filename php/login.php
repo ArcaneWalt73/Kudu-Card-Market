@@ -13,7 +13,7 @@ if ($result = mysqli_query($link, "select PASSWORD from STUDENTS where STUDENT_N
     if(!empty($password1) && password_verify($password1,$hashed)){
         $_SESSION['login_user'] = $studentNo;
     }
-    header("location: homepage.php");
+    header("location: ../homepage.php");
     mysqli_close($link);
 }
 ?>
