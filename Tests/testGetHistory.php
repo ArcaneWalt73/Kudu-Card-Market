@@ -1,6 +1,6 @@
 <?php
 include('php/getHistory.php');
-class GetHistoryTest extends PHPUnit/Framework/TestCase
+class GetHistoryTest extends PHPUnit\Framework\TestCase
 { 
   private $pdo;
   
