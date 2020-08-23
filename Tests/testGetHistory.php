@@ -16,6 +16,11 @@ class GetHistoryTest extends PHPUnit/Framework/TestCase
     $this->pdo-query("INSERT INTO PURCHASES(1000, 0)");
   }
   
+  public function testGetHIstory()
+  {
+    $result = getUserHistory($link, 0);
+    $this->asserEquals(2, $result.length);
+  }
 }
 
 ?>
