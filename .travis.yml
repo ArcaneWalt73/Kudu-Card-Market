@@ -7,5 +7,12 @@ php:
   - '7.3'
   - '7.4'
   
+env:
+  - DB=mysql
+ 
+before_script:
+  - if [["DB"== "mysql"]];then mysql -e "create database IF NOT EXISTS d1965919;" -uroot; fi
+  
 script:
-  - man --help
+  - phpunit --configuration phpunit_$DB.xml --covarage-text
+  
