@@ -1,42 +1,18 @@
+branches:
+  only:
+    - master
+sudo: required
 language: php
-
-# list any PHP version you want to test against
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.2
-  - 7.3
-  - 7.4
-  - hhvm
-  
-# optionally specify a list of environments, for example to test different RDBMS
-env:
-  - DB=mysql
+  - '7.3'
+  - '7.4'
 
-# optionally set up exclutions and allowed failures in the matrix
-matrix:
-  exclude:
-    - php: hhvm
-  allow_failures:
-    - php: 5.6
-    - php: 7.0
-    - php: hhvm
-
-# execute any number of scripts before the test run, custom env's are available as variables
 before_script:
-   - travis_retry composer self-update
-   - travis_retry composer install --no-interaction --prefer-source --dev
-   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS d1965919;" -uroot; fi
-    
-
-# omitting "script:" will default to phpunit
-# use the $DB env variable to determine the phpunit.xml to use
-script: 
-- vendor/bin/phpunit --coverage-clover coverage.xml
-- phpunit Tests/testTest.php
-
-# After success, run sh to bind coveralls
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
+  
+script:
+  - vendor/bin/phpunit --coverage-clover coverage.xml
+  
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
