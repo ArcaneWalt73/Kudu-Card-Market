@@ -5,5 +5,5 @@ Website version of the app <a href="https://github.com/The-Combrades/Kudu-Card-C
 
 
 
-[![codecov](https://codecov.io/gh/ArcaneWalt73/Kudu-Card-Market/branch/master/graph/badge.svg)](https://codecov.io/gh/ArcaneWalt73/Kudu-Card-Market)
+[![codecov](https://codecov.io/gh/The-Combrades/Kudu-Card-Market/branch/master/graph/badge.svg)](https://codecov.io/gh/The-Combrades/Kudu-Card-Market)
 
