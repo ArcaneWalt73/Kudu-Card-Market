@@ -8,4 +8,4 @@ php:
   - '7.4'
   
 script:
-  - man phpunit
+  - man --help
