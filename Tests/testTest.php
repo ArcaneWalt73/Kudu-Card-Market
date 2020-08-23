@@ -1,6 +1,6 @@
 <?php
 
-include('test.php');
+include('php/test.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
 {
