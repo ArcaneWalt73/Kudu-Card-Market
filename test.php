@@ -3,7 +3,7 @@ class TestClass
 {
   public function hello()
   {
-    echo "success";
+    return "success";
   }
 }
 ?>
