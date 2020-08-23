@@ -1,3 +1,9 @@
 <?php
-echo "success";
+class Test
+{
+  public function hello()
+  {
+    echo "success";
+  }
+}
 ?>
