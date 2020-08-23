@@ -1,11 +1,11 @@
 <?php
 
 
-class Test extends PHPUnit\Framework\TestCase
+class PHPTest extends PHPUnit\Framework\TestCase
 {
     public function testTest()
     {
-        $test = new Test();
+        $test = new TestClass();
         $this->assertEquals('success', $test->hello());
     }
 }
