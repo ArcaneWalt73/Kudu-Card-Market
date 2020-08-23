@@ -1,5 +1,5 @@
 <?php
-class Test
+class TestClass
 {
   public function hello()
   {
