@@ -1,7 +1,7 @@
 <?php
 
 include('php/test.php');
-include('php/login.php');
+#include('php/login.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
 { 
