@@ -18,8 +18,9 @@ class GetHistoryTest extends PHPUnit\Framework\TestCase
   
   public function testGetHIstory()
   {
-    $result = getUserHistory($link, 0);
-    $this->assertEquals(2, $result.length);
+    $result = getUserHistory($link, 100);
+    #should return null if the user has no history
+    $this->assertEquals(null, $result[2]);
   }
 }
 
