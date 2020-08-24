@@ -1,6 +1,6 @@
 <?php
 
-public function greeting()
+function greeting()
 {
   return "konichiwa";
 }
