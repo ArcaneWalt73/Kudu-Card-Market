@@ -1,8 +1,6 @@
 <?php
-class Greet
+
+public function greeting()
 {
-  public function greeting()
-  {
-    return "konichiwa";
-  }
+  return "konichiwa";
 }
