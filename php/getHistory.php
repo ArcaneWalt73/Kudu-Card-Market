@@ -9,6 +9,10 @@
 	$output1 = array();
 	$output2 = array();
 
+function work()
+{
+	return "success";	
+}
 
 function getUserHistory($link, $studentNo) {
 	$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
