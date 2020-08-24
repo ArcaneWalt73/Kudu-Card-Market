@@ -11,7 +11,7 @@ class PHPTest extends PHPUnit\Framework\TestCase
           $username = $GLOBALS['db_username'];
           $password = $GLOBALS['db_password'];
           $database = "d1965919";
-          $link = mysqli_connect('127.0.0.1:3307', $username, $password, $database);
+          $link = mysqli_connect('127.0.0.1:3306', $username, $password, $database);
     }
   
     
