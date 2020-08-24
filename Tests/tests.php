@@ -15,15 +15,17 @@ class PHPTest extends PHPUnit\Framework\TestCase
         $this->pdo->query("CREATE TABLE hello (what VARCHAR(50) NOT NULL)");
     }
 
-    public function tearDown()
-    {
-        $this->pdo->query("DROP TABLE hello");
-    }
+  
     
     public function testTest()
     {
         $test = new TestClass();
         $this->assertEquals('success', $test->hello());
+    }
+    
+    public function tearDown()
+    {
+        $this->pdo->query("DROP TABLE hello");
     }
 }
 
