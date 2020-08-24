@@ -19,7 +19,7 @@ class GetHistoryTest extends PHPUnit\Framework\TestCase
   public function testGetHIstory()
   {
     $result = getUserHistory($link, 0);
-    $this->asserEquals(2, $result.length);
+    $this->assertEquals(2, $result.length);
   }
 }
 
