@@ -5,17 +5,25 @@ include('php/getHistory.php');
 include('php/login.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
-{
-    protected $suc_string;
-    protected function setUp(): void
+{ 
+    private $pdo;
+
+    public function setUp()
     {
-        $suc_string = "success";
+        $this->pdo = new PDO($GLOBALS['db_dsn'], $GLOBALS['db_username'], $GLOBALS['db_password']);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->query("CREATE TABLE hello (what VARCHAR(50) NOT NULL)");
+    }
+
+    public function tearDown()
+    {
+        $this->pdo->query("DROP TABLE hello");
     }
     
     public function testTest()
     {
         $test = new TestClass();
-        $this->assertEquals($suc_string, $test->hello());
+        $this->assertEquals('success', $test->hello());
     }
 }
 
