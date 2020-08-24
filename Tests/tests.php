@@ -1,0 +1,20 @@
+<?php
+
+include('php/test.php');
+include('php/getHistory.php');
+include('php/login.php');
+
+class PHPTest extends PHPUnit\Framework\TestCase
+{
+    public function setUp(): void
+    {
+        echo "works";   
+    }
+    
+    public function testTest()
+    {
+        $test = new TestClass();
+        $this->assertEquals('success', $test->hello());
+    }
+}
+
