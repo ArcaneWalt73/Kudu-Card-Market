@@ -1,3 +1,4 @@
+<?php
 class Greet
 {
   public function greeting()
