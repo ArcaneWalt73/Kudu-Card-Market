@@ -5,14 +5,14 @@ include('php/test.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
 { 
-     private $pdo;
-
+    private $link;
     public function setUp(): void
     {
-        $this->pdo = new PDO($GLOBALS['db_dsn'], $GLOBALS['db_username'], $GLOBALS['db_password']);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->pdo->query("CREATE TABLE hello (what VARCHAR(50) NOT NULL)");
-}
+          $username = $GLOBALS['db_username'];
+          $password = $GLOBALS['db_password'];
+          $database = "d1965919";
+          $link = mysqli_connect('127.0.0.1', $username, $password, $database);
+    }
   
     
     public function testTest()
@@ -23,7 +23,7 @@ class PHPTest extends PHPUnit\Framework\TestCase
     
     public function tearDown(): void
     {
-        $this->pdo->query("DROP TABLE hello");
+        myqli_close($link);
     }
 }
 
