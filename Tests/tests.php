@@ -6,15 +6,16 @@ include('php/login.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    protected $suc_string;
+    protected function setUp(): void
     {
-        echo "works";   
+        $suc_string = "success";
     }
     
     public function testTest()
     {
         $test = new TestClass();
-        $this->assertEquals('success', $test->hello());
+        $this->assertEquals($suc_string, $test->hello());
     }
 }
 
