@@ -2,10 +2,10 @@
 
 include('php/getHistory.php');
 
-class PHPTest extends PHPUnit\Framework\TestCase
+class TestGetHistory extends PHPUnit\Framework\TestCase
 {
   public funtion testWork()
   {
-    $this->assertEquals('success', work()); 
+    $this->assertEquals('success', $this->work()); 
   }
 }
