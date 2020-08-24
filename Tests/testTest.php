@@ -13,8 +13,7 @@ class PHPTest extends PHPUnit\Framework\TestCase
     
     public function testGreeting()
     {
-        $res = new Greet();
-        $this->assertEquals('konichiwa', $res->greeting());
+        $this->assertEquals('konichiwa', greeting());
     }
 }
 
