@@ -8,7 +8,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Kudu Market Test Suite">
+        <testsuite name="PHPTests">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
