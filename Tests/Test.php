@@ -5,11 +5,12 @@ include('php/test.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
 { 
+    protected $link;
     public function setUp(): void
-    {
-        $link = mysqli_connect('127.0.0.1', $GLOBALS['db_username'], $GLOBALS['db_password'], $GLOBALS['db_dsn']);
-        mysqli_query($link, "CREATE TABLE STUDENTS(STUDENT_NO int PRIMARY KEY, PASSWORD varchar(30));");
-        mysqli_close($link);
+    {   $username = "s1965919";
+        $password = "ICTPass1670";
+        $database = "d1965919";
+        $link = mysqli_connect('s1965919@lamp.ms.wits.ac.za', $username, $password, $database);
     }
 
   
@@ -22,7 +23,7 @@ class PHPTest extends PHPUnit\Framework\TestCase
     
     public function tearDown(): void
     {
-        $this->pdo->query("DROP TABLE hello");
+        mysqli_close($link);
     }
 }
 
