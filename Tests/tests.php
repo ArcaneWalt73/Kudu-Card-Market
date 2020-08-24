@@ -6,7 +6,7 @@ include('php/login.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
 {
-    public function setUp(): void
+    public function setUp()
     {
         echo "works";   
     }
