@@ -12,7 +12,7 @@ class PHPTest extends PHPUnit\Framework\TestCase
         $password = "ICTPass1670";
         $database = "d1965919";
         
-        $url = "lamp.ms.wits.ac.za";
+        $url = "lamp.ms.wits.ac.za/~s1965919";
         $ip = gethostbyname($url);
         
         $link = mysqli_connect($ip, $username, $password, $database);
