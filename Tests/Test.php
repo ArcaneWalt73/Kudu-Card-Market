@@ -8,16 +8,12 @@ class PHPTest extends PHPUnit\Framework\TestCase
     protected $link;
     protected function setUp(): void
     {        
-        $username = "s1965919";
-        $password = "ICTPass1670";
+        $username = "root";
+        $password = "";
         $database = "d1965919";
         
-        $url = "1965919@lamp.ms.wits.ac.za";
-        $ip = gethostbyname($url);
         
-        $link = mysqli_connect($ip, $username, $password, $database);
-        $studentNo = mysqli_real_escape_string($link,$_POST["studentNumber"]); 
-        $password1 = mysqli_real_escape_string($link,$_POST["password"]);   
+        $link = mysqli_connect("127.0.0.1", $username, $password, $database);   
     }
     
     public function testTest()
