@@ -17,10 +17,9 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-	<!-- Awesome Font CDN -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    </head> 
+        <!-- Awesome Font CDN -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    </head>
 
     <body>
         <div class="navbar">
@@ -69,13 +68,13 @@
                     var div1 = document.createElement("div");
                     var div2 = document.createElement("div");
                     div1.setAttribute("class","column");
-		    var string1 = "location.href='./item_page.php?id=";
-		    string1 = string1.concat(myData[i]['MARKET_ID'], "';");
-		    div1.setAttribute("onclick", string1);
+                    var string1 = "location.href='./item_page.php?id=";
+                    string1 = string1.concat(myData[i]['MARKET_ID'], "';");
+                    div1.setAttribute("onclick", string1);
                     div2.setAttribute("class","card");
                     var img = document.createElement("IMG");
 		    img.setAttribute("class", "images");
-                    img.setAttribute("src", myData[i]["IMAGE_URL"]);
+                     img.setAttribute("src", myData[i]["IMAGE_URL"]);
                     img.setAttribute("alt", myData[i]["NAME"]);
 		    img.setAttribute("width","210");
                     img.setAttribute("height","170");

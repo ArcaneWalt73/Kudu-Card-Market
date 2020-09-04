@@ -39,4 +39,13 @@ if($user->doLogin()){
 else{
     header('location: ../index.php');
 }
+
+/*$user = new login($_POST["studentNumber"],$_POST["password"]);
+$var = $user->doLogin();
+if($user->doLogin()){
+    header('location: ../homepage.php');
+}
+else{
+    header('location: ../index.php');
+}*/
 ?>
