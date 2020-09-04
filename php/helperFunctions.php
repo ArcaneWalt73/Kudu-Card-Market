@@ -23,4 +23,12 @@ function getItemInfo($link, $id){
        	$response['ERROR'] = true;
 }
 
+/*
+ * Function to buy an Item
+ */
+function buyItem($link, $id, $studentID) {
+	
+}
+
+
 ?>
