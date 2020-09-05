@@ -5,5 +5,10 @@ class TestClass
   {
     return "success";
   }
+  
+  public function goodbye()
+  {
+    return "success"; 
+  }
 }
 ?>
