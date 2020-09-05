@@ -3,7 +3,7 @@
 include('php/test.php');
 #include('php/login.php');
 
-class Test extends PHPUnit\Framework\TestCase
+class Test1 extends PHPUnit\Framework\TestCase
 { 
     public function testHello()
     {
