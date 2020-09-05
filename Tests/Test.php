@@ -5,10 +5,16 @@ include('php/test.php');
 
 class PHPTest extends PHPUnit\Framework\TestCase
 { 
-    public function testTest()
+    public function testHello()
     {
         $test = new TestClass();
         $this->assertEquals('success', $test->hello());
+    }
+    
+    public function testGoodbye()
+    {
+        $test = new TestClass();
+        $this->assertEquals('success', $test->goodbye());
     }
 }
 
