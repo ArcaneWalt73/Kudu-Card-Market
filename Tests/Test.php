@@ -11,10 +11,5 @@ class PHPTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('success', $test->hello());
     }
     
-    public function testGoodbye()
-    {
-        $test = new TestClass();
-        $this->assertEquals('success', $test->goodbye());
-    }
 }
 
