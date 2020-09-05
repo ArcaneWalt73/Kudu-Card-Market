@@ -1,7 +1,7 @@
 
 include('php/test.php');
 
-class PHPTest extends PHPUnit\Framework\TestCase
+class Test2 extends PHPUnit\Framework\TestCase
 { 
     public function testGoodbye()
     {
