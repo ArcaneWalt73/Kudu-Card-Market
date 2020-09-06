@@ -1,4 +1,4 @@
-
+<?php
 include('php/test.php');
 
 class secondTest extends PHPUnit\Framework\TestCase
