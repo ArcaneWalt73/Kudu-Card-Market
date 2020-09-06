@@ -1,5 +1,5 @@
 <?php
-  public function goodbye()
+  function goodbye()
   {
     return "success"; 
   }
