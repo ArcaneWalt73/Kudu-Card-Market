@@ -1,5 +1,5 @@
 <?php
-include 'php/Database.php';
+//include 'php/Database.php';
 include 'php/login.php';
 
   class loginTest extends PHPUnit\Framework\TestCase {
