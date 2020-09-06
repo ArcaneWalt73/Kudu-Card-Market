@@ -5,7 +5,7 @@ class secondTest extends PHPUnit\Framework\TestCase
 { 
     public function testGoodbye()
     {
-        $test = new TestClass();
+        $test = new TestClass2();
         $this->assertEquals('success', $test->goodbye());
     }
     
