@@ -1,6 +1,6 @@
 <?php
-require_once '../php/Database.php';
-require_once '../php/login.php';
+require_once './php/Database.php';
+require_once './php/login.php';
 
   class loginTest extends PHPUnit\Framework\TestCase {
 
