@@ -14,7 +14,7 @@ before_script:
   - if [["DB"== "mysql"]];then mysql -e "create database IF NOT EXISTS d1965919;" -uroot; fi
   
 script:
-#  - phpunit --configuration phpunit.xml --testsuite PHPTests --coverage-text --coverage-clover=coverage.xml
-   - phpunit  --coverage-text --coverage-clover=coverage.xml ./Tests/
+ - phpunit --configuration phpunit.xml --testsuite PHPTests --coverage-text --coverage-clover=coverage.xml
+ #  - phpunit  --coverage-text --coverage-clover=coverage.xml ./Tests/
 after_success:
   - bash <(curl -s https://codecov.io/bash)
