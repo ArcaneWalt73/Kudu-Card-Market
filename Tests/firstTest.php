@@ -1,6 +1,6 @@
 <?php
 
-include('php/test.php');
+include('php/test2.php');
 #include('php/login.php');
 
 class firstTest extends PHPUnit\Framework\TestCase
