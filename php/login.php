@@ -56,14 +56,14 @@ class login{
     }
 
     public function getAllTasks() {
-        $this->database->query('SELECT `password` FROM `student` where `student_no`='.$this->studentNo);
+        $this->database->query('SELECT PASSWORD FROM STUDENT where STUDENT_NO='.$this->studentNo);
         $results = $this->database->resultSet();
         return $results;
     }
 
     public function doLogin(){
         if ($result = $this->getAllTasks()){
-            $hashed = $result[0]['`password`'];
+            $hashed = $result[0]['PASSWORD'];
             if(!empty($this->password1) && ($this->password1==$hashed)){
                 $_SESSION['login_user'] = $this->studentNo;
                 return true;
