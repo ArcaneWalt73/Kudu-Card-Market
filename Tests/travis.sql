@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `users`
+ALTER TABLE `student`
   ADD PRIMARY KEY (`student_no`);
 
 # Add Data
