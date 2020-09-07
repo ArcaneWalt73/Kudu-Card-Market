@@ -1,6 +1,6 @@
 <?php
 
-  function saySomething($link)
+  /*function saySomething($link)
   { 
      #$sql = "select words from DUMMY_T where id=0";
      #$result = mysqli_query( $link, $sql );
@@ -17,7 +17,7 @@
     
     
      return json_encode($output);     
-  }
+  }*/
 
   function goodbye()
   {
