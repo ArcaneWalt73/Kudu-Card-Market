@@ -18,26 +18,6 @@ ALTER TABLE STUDENT
 # Add Data
 INSERT INTO STUDENT(STUDENT_NO,PASSWORD) values('1234','123')
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `db`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `students`
---
-
 CREATE TABLE `students` (
   `STUDENT_NO` varchar(20) NOT NULL,
   `FNAME` varchar(20) NOT NULL,
