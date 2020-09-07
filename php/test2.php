@@ -16,7 +16,7 @@
       }
     
     
-     return $output;     
+     return json_encode($output);     
   }
 
   function goodbye()
