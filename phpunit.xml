@@ -2,7 +2,7 @@
 
 <phpunit bootstrap="Tests/bootstrap.php" colors="true">
     <php>
-        <var name="db_dsn" value="mysql:dbname=d1965919;host=127.0.0.1;port=3306"/>
+        <var name="db_dsn" value="mysql:dbname=d1965919;host=127.0.0.1"/>
         <var name="db_username" value="root"/>
         <var name="db_password" value="toor"/>
     </php>
