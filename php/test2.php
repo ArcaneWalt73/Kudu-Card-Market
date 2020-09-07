@@ -4,10 +4,9 @@
   { 
      $sql = "select words from DUMMY_T where id=0";
      $result = mysqli_query( $link, $sql );
-     #$row = mysqli_fetch_assoc($result);
-      $data = mysqli_result($result,0);
+     $row = $result->mysqli_fetch_assoc();
      
-     return $data;     
+     return $row;     
   }
 
   function goodbye()
