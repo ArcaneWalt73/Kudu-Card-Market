@@ -64,7 +64,7 @@ class login{
     public function doLogin(){
         if ($result = $this->getAllTasks()){
             $hashed = $result[0]['PASSWORD'];
-            if(!empty($this->password1) && ($this->password1==$hashed)){
+            if(!empty($this->password1) && password_verify($this->password1,$hashed)){
                 $_SESSION['login_user'] = $this->studentNo;
                 return true;
             }
