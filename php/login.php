@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Database{
     private $username = "root";
     private $password = "";
@@ -48,7 +49,6 @@ class login{
     }
 
     public function doLogin(){
-        session_start();
         if ($result = $this->getAllTasks()){
             $hashed = $result[0];
             if(!empty($pass) && password_verify($pass,$hashed)){
