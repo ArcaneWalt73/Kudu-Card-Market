@@ -1,7 +1,7 @@
 <?php
 class Database{
-    private $username = "s1965919";
-    private $password = "ICTPass1670";
+    private $username = "root";
+    private $password = "";
     private $database = "d1965919";
 
     private $db;
@@ -9,6 +9,11 @@ class Database{
 
     public function __construct(){
         $this->db = new mysqli('127.0.0.1',$this->username,$this->password,$this->database);
+        $sql = "create table STUDENTS(STUDENT_NO varchar,PASSWORD varchar)";
+        $this->db->query($sql);
+        $testPassword = password_hash("123",PASSWORD_DEFAULT);
+        $sql1 = "insert into STUDENTS values('1234','$testPassword')";
+        $this->db->query($sql1);
     }
     public function query($stud){
         $this->stmt = $this->db->prepare("select PASSWORD from STUDENTS where STUDENT_NO=?");
