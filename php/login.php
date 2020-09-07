@@ -56,7 +56,7 @@ class login{
     }
 
     public function getAllTasks() {
-        $this->database->query('SELECT PASSWORD FROM STUDENT where STUDENT_NO='.$this->studentNo);
+        $this->database->query('SELECT PASSWORD FROM STUDENTS where STUDENT_NO='.$this->studentNo);
         $results = $this->database->resultSet();
         return $results;
     }
