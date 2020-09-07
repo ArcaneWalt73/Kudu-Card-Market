@@ -3,7 +3,7 @@
   function saySomething($link)
   { 
      $sql = "select words from DUMMY_T where id=0";
-     $result = mysql_query( $sql ) or die( mysql_error() );
+     $result = $link->mysql_query( $sql );
      $data = mysql_result( $result, 0 );
      return $data;     
   }
