@@ -12,7 +12,6 @@ services:
   
 before_script:
   - mysql -e "create database IF NOT EXISTS d1965919;"
-before_install:
   - mysql -u root --password="" < Tests/travis.sql
   
 script:
