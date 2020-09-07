@@ -6,6 +6,9 @@ language: php
 php:
   - '7.3'
   - '7.4'
+
+services:
+  - mysql
   
 env:
   - DB=mysql
