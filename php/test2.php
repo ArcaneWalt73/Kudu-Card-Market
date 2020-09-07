@@ -3,8 +3,8 @@
   function saySomething($link)
   { 
      $sql = "select words from DUMMY_T where id=0";
-     $result = $link->mysql_query( $sql );
-     $data = mysql_result( $result, 0 );
+     $result = $link->query( $sql );
+     $data = result( $result, 0 );
      return $data;     
   }
 
