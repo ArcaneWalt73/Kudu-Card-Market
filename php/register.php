@@ -23,7 +23,11 @@ class Database1 {
     }
 
     public function query($sql){
-        $this->stmt = $this->db->exec($sql);
+        try{
+            $this->stmt = $this->db->exec($sql);
+        }catch(PDOException $e){
+            $this->stmt = -1;
+        }
     }
 
     public function resultSet(){
