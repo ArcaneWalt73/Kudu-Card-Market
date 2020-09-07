@@ -1,15 +1,17 @@
 <?php
 include('php/test.php');
 
+$username = "root";
+$password = "";
+$database = "d1965919";
+$link = mysqli_connect("127.0.0.1", $username, $password,$database);
+
+
 class secondTest extends PHPUnit\Framework\TestCase
 { 
-    $link;
     protected function setUp(): void
     {
-            $username = "root";
-            $password = "";
-            $database = "d1965919";
-            $link = mysqli_connect("127.0.0.1", $username, $password,$database);
+            
     
         
             $sql = "create table DUMMY_T(id int,words varchar)";
