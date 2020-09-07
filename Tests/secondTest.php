@@ -19,7 +19,7 @@ class secondTest extends PHPUnit\Framework\TestCase
             $link->query($sql);
         
             
-            $sql = "insert into DUMMY_T(id, words) values(0, 'It fucking works!')";
+            $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta')";
             $link->query($sql);
            
     }
@@ -27,7 +27,7 @@ class secondTest extends PHPUnit\Framework\TestCase
     public function testSaySomething()
     {
         global $link;
-        $this->assertEquals('It fucking works!', saySomething($link));   
+        $this->assertEquals('yokatta', saySomething($link));   
     }
     
     public function testGoodbye()
