@@ -1,40 +1,52 @@
 <?php
 session_start();
-class Database{
-    private $username = "root";
-    private $password = "";
-    private $database = "d1965919";
+class Database {
+
+    private $host = '127.0.0.1';
+    private $user = 'root';
+    private $pass = '';
+    private $dbname = 'd1965919';
 
     private $db;
     private $stmt;
+    private $testPassword;
+    private $testUser;
+    private $error;
 
     public function __construct(){
-        try{
-            $this->db = new mysqli('127.0.0.1',$this->username,$this->password,$this->database);
-            $sql = "create table STUDENTS(STUDENT_NO varchar,PASSWORD varchar)";
-            $this->db->query($sql);
-            $testPassword = password_hash("123",PASSWORD_DEFAULT);
-            $sql1 = "insert into STUDENTS values('1234','$testPassword')";
-            $this->db->query($sql1);
-        }catch(Exception $e){
-            $error = $e->getMessage();
-            echo $error;
+        // Set DSN
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+        $options = array(
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
+
+        // Create PDO instance
+        try {
+            $this->db = new PDO($dsn, $this->user, $this->pass, $options);
+            $this->db->exec("create table if not exists STUDENT(STUDENT_NO varchar(20) NOT NULL, PASSWORD text NOT NULL, PRIMARY KEY(STUDENT_NO))");
+            $this->testPassword = password_hash('123',PASSWORD_DEFAULT);
+            $this->testUser = '1234';
+            $this->db->exec("insert into STUDENT (STUDENT_NO,PASSWORD) values('$this->testUser','$this->testPassword')");
+        } catch(PDOException $e){
+            $this->error = $e->getMessage();
+            echo $this->error;
         }
     }
-    public function query1($stud){
-        $this->stmt = $this->db->prepare("select PASSWORD from STUDENTS where STUDENT_NO=?");
-        $this->stmt->bind_param("s",$stud);
-        $this->stmt->execute();
-        $this->db->close();
+
+    public function query($sql){
+        $this->stmt = $this->db->prepare($sql);
+        $this->execute();
     }
+
     public function execute(){
         return $this->stmt->execute();
     }
-  
+
     public function resultSet(){
-        $result = $this->execute();
-        return $result->fetchAll(MYSQLI_ASSOC);
-  
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }
 class login{
@@ -48,26 +60,23 @@ class login{
     }
 
     public function getAllTasks() {
-        $this->database->query1($this->studentNo);
+        $this->database->query('SELECT PASSWORD FROM STUDENT where STUDENT_NO='.$this->studentNo);
         $results = $this->database->resultSet();
         return $results;
     }
 
     public function doLogin(){
         if ($result = $this->getAllTasks()){
-            $hashed = $result[0];
-            if(!empty($pass) && password_verify($pass,$hashed)){
-                $_SESSION['login_user'] = $stdNo;
-                mysql_close($link);
+            $hashed = $result[0]['PASSWORD'];
+            if(!empty($this->password1) && password_verify($this->password1,$hashed)){
+                $_SESSION['login_user'] = $this->studentNo;
                 return true;
             }
             else{
                 //header("location: ../homepage.php");
-                mysqli_close($link);
                 return false; // wrong password
             }
         }
-        mysql_close($link);
         return false; // account does not exist
     }
 }
