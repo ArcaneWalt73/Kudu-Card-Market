@@ -7,7 +7,7 @@
      #$row = $result->mysqli_fetch_assoc();
 
       $output = array();
-      if ($mResult = mysqli_query($link, "select words from DUMMY_T where id=0;")) 
+      if ($mResult = mysqli_query($link, "select * from DUMMY_T;")) 
       {
 				while ($row = $mResult->fetch_assoc())
         {
