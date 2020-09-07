@@ -1,7 +1,7 @@
 <?php
     include 'php/register.php';
 
-    class testRegister extends PHPUnit\Framework\TestCase {
+    class registerTest extends PHPUnit\Framework\TestCase {
 
         public function testGetAllTasks() {
             $dbase = $this->getMockBuilder('Database')->getMock();
