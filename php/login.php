@@ -16,7 +16,7 @@ class Database{
         $sql1 = "insert into STUDENTS values('1234','$testPassword')";
         $this->db->query($sql1);
     }
-    public function query($stud){
+    public function query1($stud){
         $this->stmt = $this->db->prepare("select PASSWORD from STUDENTS where STUDENT_NO=?");
         $this->stmt->bind_param("s",$stud);
         $this->stmt->execute();
@@ -43,7 +43,7 @@ class login{
     }
 
     public function getAllTasks() {
-        $this->database->query($this->studentNo);
+        $this->database->query1($this->studentNo);
         $results = $this->database->resultSet();
         return $results;
     }
