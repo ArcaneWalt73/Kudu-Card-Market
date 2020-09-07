@@ -1,5 +1,5 @@
 <?php
-class Database {
+class Database1 {
 
     private $host = '127.0.0.1';
     private $user = 'root';
@@ -47,7 +47,7 @@ class register{
         $this->password1 = $pass;
         $this->email = $email;
         $this->cellNo = $cellNo;
-        $this->database = new Database;
+        $this->database = new Database1;
     }
 
     public function getAllTasks() {
