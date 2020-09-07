@@ -24,10 +24,6 @@ class Database {
         // Create PDO instance
         try {
             $this->db = new PDO($dsn, $this->user, $this->pass, $options);
-            $this->db->exec("create table if not exists STUDENT(STUDENT_NO varchar(20) NOT NULL, PASSWORD text NOT NULL, PRIMARY KEY(STUDENT_NO))");
-            $this->testPassword = password_hash('123',PASSWORD_DEFAULT);
-            $this->testUser = '1234';
-            $this->db->exec("insert into STUDENT (STUDENT_NO,PASSWORD) values('$this->testUser','$this->testPassword')");
         } catch(PDOException $e){
             $this->error = $e->getMessage();
             echo $this->error;
@@ -68,7 +64,7 @@ class login{
     public function doLogin(){
         if ($result = $this->getAllTasks()){
             $hashed = $result[0]['PASSWORD'];
-            if(!empty($this->password1) && password_verify($this->password1,$hashed)){
+            if(!empty($this->password1) && ($this->password1==$hashed)){
                 $_SESSION['login_user'] = $this->studentNo;
                 return true;
             }
