@@ -16,7 +16,7 @@
       }
     
     
-     return output[0];     
+     return &output[0];     
   }
 
   function goodbye()
