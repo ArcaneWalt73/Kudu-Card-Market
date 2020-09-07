@@ -22,12 +22,7 @@ class Database {
         );
 
         // Create PDO instance
-        try {
-            $this->db = new PDO($dsn, $this->user, $this->pass, $options);
-        } catch(PDOException $e){
-            $this->error = $e->getMessage();
-            echo $this->error;
-        }
+        $this->db = new PDO($dsn, $this->user, $this->pass, $options);
     }
 
     public function query($sql){
@@ -73,7 +68,7 @@ class login{
                 return false; // wrong password
             }
         }
-        return false; // account does not exist
+        //return false; // account does not exist
     }
 }
 ?>
