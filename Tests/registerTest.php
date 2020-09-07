@@ -4,7 +4,7 @@
     class registerTest extends PHPUnit\Framework\TestCase {
 
         public function testGetAllTasks() {
-            $dbase = $this->getMockBuilder('Database')->getMock();
+            $dbase = $this->getMockBuilder('Database1')->getMock();
 
             $dbase->method('resultSet')->will($this->returnValue(1));
 
