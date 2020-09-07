@@ -9,7 +9,7 @@ class secondTest extends PHPUnit\Framework\TestCase
             $username = "root";
             $password = "toor";
             $database = "d1965919";
-            $link = mysqli_connect("localhost", $username, $password,$database);
+            $link = mysqli_connect("localhost:8889", $username, $password,$database);
     
         
             $sql = "create table DUMMY_T(id int,words varchar)";
