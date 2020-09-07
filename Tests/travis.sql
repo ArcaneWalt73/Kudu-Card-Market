@@ -16,9 +16,9 @@ ALTER TABLE STUDENT
   ADD PRIMARY KEY (STUDENT_NO);
 
 # Add Data
-INSERT INTO STUDENT(STUDENT_NO,PASSWORD) values('1234','123')
+INSERT INTO STUDENT(STUDENT_NO,PASSWORD) values('1234','123');
 
-CREATE TABLE `students` (
+CREATE TABLE IF NOT EXISTS `STUDENTS` (
   `STUDENT_NO` varchar(20) NOT NULL,
   `FNAME` varchar(20) NOT NULL,
   `LNAME` varchar(20) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`STUDENT_NO`, `FNAME`, `LNAME`, `PASSWORD`, `EMAIL_ADDRESS`, `CONTACT_NO`) VALUES
+INSERT INTO `STUDENTS` (`STUDENT_NO`, `FNAME`, `LNAME`, `PASSWORD`, `EMAIL_ADDRESS`, `CONTACT_NO`) VALUES
 ('123', 'd', 'd', '123', 'd@gmail.com', '09'),
 ('1234', 'Davis', 'Moswedi', '$2y$10$H3pKG2VRUU0Jr8mUYVG7Y.EJgn4l9sGHJDHkbH.AUMk04Brj.LMhG', 'davis@gmail.com', '0835160151'),
 ('12345', 'sd', 'ad', '$2y$10$LeOJFAXDzqFqk.Fsb8U0TuN4.tmSfoTiP1DMIR6SVkaE/nl7SLoh.', 'a@gamul.com', 'er'),
@@ -45,7 +45,7 @@ INSERT INTO `students` (`STUDENT_NO`, `FNAME`, `LNAME`, `PASSWORD`, `EMAIL_ADDRE
 --
 -- Indexes for table `students`
 --
-ALTER TABLE `students`
+ALTER TABLE `STUDENTS`
   ADD PRIMARY KEY (`STUDENT_NO`),
   ADD UNIQUE KEY `EMAIL_ADDRESS` (`EMAIL_ADDRESS`);
 COMMIT;
