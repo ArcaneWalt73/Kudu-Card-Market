@@ -1,38 +1,68 @@
 <?php
-session_start();
+class Database {
 
-$username = "s1965919";
-$password = "ICTPass1670";
-$database = "d1965919";
-$link = mysqli_connect('127.0.0.1', $username, $password, $database);
-$studentNo = mysqli_real_escape_string($link,$_POST["studentNumber"]);
-$Fname = mysqli_real_escape_string($link,$_POST["fname"]);
-$Lname = mysqli_real_escape_string($link,$_POST["lname"]);
-$email = mysqli_real_escape_string($link,$_POST["email"]);
-$contact = mysqli_real_escape_string($link,$_POST["contact"]); 
-$password1 = mysqli_real_escape_string($link,$_POST["password"]);
-$hash = password_hash($password1,PASSWORD_DEFAULT);
+    private $host = '127.0.0.1';
+    private $user = 'root';
+    private $pass = '';
+    private $dbname = 'd1965919';
 
-if ($result = mysqli_query($link, "insert into STUDENTS(STUDENT_NO,FNAME,LNAME,PASSWORD,EMAIL_ADDRESS,CONTACT_NO) values('$studentNo','$Fname','$Lname','$hash','$email','$contact');")){
-    header("location: ../index.php");
+    private $db;
+    private $stmt;
+    private $testPassword;
+    private $testUser;
+    private $error;
+
+    public function __construct(){
+        // Set DSN
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+        $options = array(
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
+        $this->db = new PDO($dsn, $this->user, $this->pass, $options);
+    }
+
+    public function query($sql){
+        $this->stmt = $this->db->exec($sql);
+    }
+
+    public function resultSet(){
+        return $this->stmt;
+
+    }
 }
-else if(mysqli_num_rows(mysqli_query($link,"select STUDENT_NO from STUDENTS where STUDENT_NO='$studentNo';"))==1){
-    //direct the user to create account since this studentNo already exists in the database
-    $message = "the username already exists";
-}else{
-    //direct the user to create account since the email already exists in the database
-    $message = "there is an account with this email";
+class register{
+    private $studentNo;
+    private $fname;
+    private $lname;
+    private $password1;
+    private $email;
+    private $cellNo;
+    private $database;
+    private $statement;
+    public function __construct($stud, $fname, $lname, $pass, $email, $cellNo){
+        $this->studentNo = $stud;
+        $this->fname = $fname;
+        $this->lname = $lname;
+        $this->password1 = $pass;
+        $this->email = $email;
+        $this->cellNo = $cellNo;
+        $this->database = new Database;
+    }
+
+    public function getAllTasks() {
+        $this->statement = "INSERT INTO `STUDENTS` (`STUDENT_NO`, `FNAME`, `LNAME`, `PASSWORD`, `EMAIL_ADDRESS`, `CONTACT_NO`) VALUES('$this->studentNo', '$this->fname', '$this->lname', '$this->password1', '$this->email', '$this->cellNo')";
+        $this->database->query($this->statement);
+        $results = $this->database->resultSet();
+        return $results;
+    }
+
+    public function doRegister(){
+        if($this->getAllTasks()==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
-mysqli_close($link);
 ?>
-<html>
-   <body>
-      <h1>
-         <?php 
-	    echo $result;
-            echo json_encode($message);
-         ?>
-      </h1> 
-   </body>
-   
-</html>
