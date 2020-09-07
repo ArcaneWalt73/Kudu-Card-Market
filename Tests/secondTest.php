@@ -24,11 +24,11 @@ class secondTest extends PHPUnit\Framework\TestCase
            
     }
     
-    public function testSaySomething()
+    /*public function testSaySomething()
     {
         global $link;
         $this->assertEquals('yokatta', saySomething($link));   
-    }
+    }*/
     
     public function testGoodbye()
     {
