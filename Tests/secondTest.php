@@ -20,12 +20,9 @@ class secondTest extends PHPUnit\Framework\TestCase
 
 
         $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta')";
-        $myQuery = $link->query($sql);
+        $link->query($sql);
         
-        if($myQuery == false)
-        {
-            die("couldn't insert into dummy");
-        }
+        echo "fuck!";
             
            
     }
