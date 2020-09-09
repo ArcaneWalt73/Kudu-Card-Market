@@ -22,6 +22,8 @@ class secondTest extends PHPUnit\Framework\TestCase
         $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta')";
         $link->query($sql);
         
+        $result = $link->query("select * from DUMMY_T");
+        
         echo "fuck!";
             
            
