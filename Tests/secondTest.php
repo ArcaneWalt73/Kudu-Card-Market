@@ -10,7 +10,7 @@ include('php/test.php');
 
 class secondTest extends PHPUnit\Framework\TestCase
 { 
-    $private $pdo;
+    private $pdo;
     protected function setUp(): void
     {
            
