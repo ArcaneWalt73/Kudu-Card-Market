@@ -24,7 +24,7 @@ class secondTest extends PHPUnit\Framework\TestCase
         
         $result = $link->query("select * from DUMMY_T;");
         
-        echo "________RESULT=:   " +$result;
+        echo "________RESULT=:   ".$result;
             
            
     }
