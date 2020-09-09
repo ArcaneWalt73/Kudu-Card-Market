@@ -15,20 +15,20 @@ class secondTest extends PHPUnit\Framework\TestCase
            
             
         global $link;
-        $sql = "create table DUMMY_T(id int,words varchar);";
+        $sql = "create table DUMMY_T(words varchar);";
         $link->query($sql);
 
 
-        $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta');";
+        $sql = "insert into `DUMMY_T` (`words`) values('yokatta');";
         $link->query($sql);
         
-        $result = $link->query("show tables;");
+        $result = $link->query("select * from DUMMY_T;");
         
         if($result->num_rows > 0)
         {
             while($row = $result->fetch_assoc())
             {
-                echo "________RESULT=:   ".$row[0];
+                echo "________RESULT=:   ".$row['words'];
             }
         }
             
