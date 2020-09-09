@@ -24,8 +24,13 @@ class secondTest extends PHPUnit\Framework\TestCase
         
         $result = $link->query("show tables;");
         
-        
-        echo "________RESULT=:   ".$result->num_rows;
+        if($result->num_rows > 0)
+        {
+            while($row = $result->fetch_assoc())
+            {
+                echo "________RESULT=:   ".$row;
+            }
+        }
             
            
     }
