@@ -14,13 +14,19 @@ class secondTest extends PHPUnit\Framework\TestCase
     {
            
             
-            global $link;
-            $sql = "create table DUMMY_T(id int,words varchar)";
-            $link->query($sql);
+        global $link;
+        $sql = "create table DUMMY_T(id int,words varchar)";
+        $link->query($sql);
+
+
+        $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta')";
+        $myQuery = $link->query($sql);
         
+        if($myQuery == false)
+        {
+            die("couldn't insert into dummy");
+        }
             
-            $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta')";
-            $link->query($sql);
            
     }
     
