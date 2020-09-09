@@ -28,7 +28,7 @@ class secondTest extends PHPUnit\Framework\TestCase
         {
             while($row = $result->fetch_assoc())
             {
-                echo "________RESULT=:   ".$row;
+                echo "________RESULT=:   ".$row[0];
             }
         }
             
