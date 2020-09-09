@@ -24,7 +24,8 @@ class secondTest extends PHPUnit\Framework\TestCase
         
         $result = $link->query("show tables;");
         
-        echo "________RESULT=:   ".$result;
+        
+        echo "________RESULT=:   ".$result->num_rows;
             
            
     }
