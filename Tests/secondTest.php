@@ -15,16 +15,16 @@ class secondTest extends PHPUnit\Framework\TestCase
            
             
         global $link;
-        $sql = "create table DUMMY_T(id int,words varchar)";
+        $sql = "create table DUMMY_T(id int,words varchar);";
         $link->query($sql);
 
 
-        $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta')";
+        $sql = "insert into DUMMY_T(id, words) values(0, 'yokatta');";
         $link->query($sql);
         
-        $result = $link->query("select * from DUMMY_T");
+        $result = $link->query("select * from DUMMY_T;");
         
-        echo $result;
+        echo "________RESULT=:   " +$result;
             
            
     }
