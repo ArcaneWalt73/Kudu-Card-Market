@@ -12,9 +12,9 @@
 	function getMarketIds($pdo, $studentNo)
 	{
 		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';"
-		$res = $this->pdo->query($sql);
+		$stmt = $this->pdo->query($sql);
 		
-		return $res->fetchColumn();
+		return $stmt->fetchColumn();
 	}
 
 	function getUserHistory($link, $studentNo) {
