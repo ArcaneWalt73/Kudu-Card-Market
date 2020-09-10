@@ -1,6 +1,6 @@
 <?php
 
-class gethistoryTest extends PHPUnit/Framework/TestCase
+class gethistoryTest extends PHPUnit\Framework\TestCase
 {
   /**
   * @var PDO
