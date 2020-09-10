@@ -46,7 +46,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
     );
     
     global $pdo;
-    $pdo = this->pdo;
+    $pdo = $this->pdo;
   }
   
   public function testgetPurchases()
