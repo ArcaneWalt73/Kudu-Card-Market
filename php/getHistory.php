@@ -11,7 +11,7 @@
 
 	function getMarketIds($pdo, $studentNo)
 	{
-		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';"
+		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
 		$stmt = $this->pdo->query($sql);
 		
 		return $stmt->fetchColumn();
