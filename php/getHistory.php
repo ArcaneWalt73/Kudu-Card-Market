@@ -1,5 +1,5 @@
 <?php
-	session_start();
+// 	session_start();
 // !!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE FOR WEBSITE
 // 	$username = "s1965919";
 // 	$password = "ICTPass1670";
