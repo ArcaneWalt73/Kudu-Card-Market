@@ -45,7 +45,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
       (13,'https://lamp.ms.wits.ac.za/~s1965919/uploads/13.jpeg','Acer Nitro 5',9999.99,'Electronics','PRODUCT DETAILS\n\nOperating system:Windows OS\n\nScreen size:15.6 in\n\nInstalled memory:3 GB RAM\n\nGraphics processor:NVIDIA GPU\n\nExplore and enjoy a new and more immersive level of gaming with the Nitro 5?s full HD display and powerful gaming tech.');"
     );
     
-    $global $pdo;
+    global $pdo;
     $pdo = this->$pdo;
   }
   
