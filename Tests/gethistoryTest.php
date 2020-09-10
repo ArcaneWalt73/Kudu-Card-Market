@@ -46,7 +46,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
     );
   }
   
-  public function testgetPurchases()
+  public static function testgetPurchases()
   {
      //test to see that the MarketId of the value in the first row is 18
      $this->assertEquals(18,getPurchases($this->pdo,'7777777'));
