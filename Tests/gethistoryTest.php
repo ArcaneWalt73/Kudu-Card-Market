@@ -21,7 +21,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
       `PURCHASE_DATE` date NOT NULL,
        KEY `STUDENT_NO` (`STUDENT_NO`),
        KEY `MARKET_ID` (`MARKET_ID`),
-       ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+       );"
      );
      
      //create MARKET_NEW table
@@ -34,7 +34,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
        `CATEGORY` varchar(30) NOT NULL,
        `DESCRIPTION` text NOT NULL,
         PRIMARY KEY (`MARKET_ID`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;"
+        );"
        );  
     
     //insert values into PURCHASE
