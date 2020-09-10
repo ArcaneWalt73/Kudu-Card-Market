@@ -9,7 +9,7 @@
 	$output1 = array();
 	$output2 = array();
 
-	fucntion getMarketIds($pdo, $studentNo)
+	function getMarketIds($pdo, $studentNo)
 	{
 		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';"
 		$res = $this->pdo->query($sql);
