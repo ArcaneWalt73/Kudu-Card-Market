@@ -21,8 +21,6 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
       `PURCHASE_DATE` date NOT NULL,
        KEY `STUDENT_NO` (`STUDENT_NO`),
        KEY `MARKET_ID` (`MARKET_ID`),
-       CONSTRAINT `PURCHASES_ibfk_1` FOREIGN KEY (`STUDENT_NO`) REFERENCES `STUDENTS` (`STUDENT_NO`),
-       CONSTRAINT `PURCHASES_ibfk_2` FOREIGN KEY (`MARKET_ID`) REFERENCES `MARKET_NEW` (`MARKET_ID`)
        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
      );
      
