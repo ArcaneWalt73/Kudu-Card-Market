@@ -5,6 +5,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
   /**
   * @var PDO
   */
+  include('./php/getHistory.php');
   
   private $pdo;
   
