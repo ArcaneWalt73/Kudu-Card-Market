@@ -16,6 +16,15 @@
 		
 		return $stmt->fetchColumn();
 	}
+	
+	//gets the details of the items given Market_Id
+	function getItemDetails(PDO $pdo, $market_id)
+	{
+		$sql = "select * from MARKET_NEW where MARKET_ID='$market_id';"
+		$stmt = $pdo->query($sql);
+		
+		return $stmt->fetchColumn();
+	}
 
 // 	function getUserHistory($link, $studentNo) {
 // 		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
