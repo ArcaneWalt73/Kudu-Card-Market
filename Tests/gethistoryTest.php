@@ -16,16 +16,16 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
     //create the PURCHASES table
     $this->pdo->query(
       "CREATE TABLE PURCHASES (
-       STUDENT_NO varchar(20) NOT NULL,
-       MARKET_ID int(11) unsigned NOT NULL,
-       PURCHASE_DATE date NOT NULL
+       STUDENT_NO varchar(20) ,
+       MARKET_ID int(11) unsigned ,
+       PURCHASE_DATE date
        );"
      );
      
      //create MARKET_NEW table
      $this->pdo->query(
        "CREATE TABLE MARKET_NEW (
-        MARKET_ID int(11) unsigned NOT NULL AUTO_INCREMENT,
+        MARKET_ID int(11) unsigned NOT NULL,
         IMAGE_URL text,
         NAME varchar(30) NOT NULL,
         PRICE decimal(6,2) NOT NULL,
