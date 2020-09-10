@@ -1,6 +1,25 @@
 <?php
+
+function getPurchases(PDO $pdo, $studentNo)
+{
+	$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
+	$stmt = $pdo->query($sql);
+
+	return $stmt->fetchColumn();
+}
+
+//gets the details of the items given Market_Id
+function getItemDetails(PDO $pdo, $market_id)
+{
+	$sql = "select * from MARKET_NEW where MARKET_ID='$market_id';";
+	$stmt = $pdo->query($sql);
+
+	return $stmt->fetchColumn(2);
+}
+
+// !!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE IT  FOR WEBSITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 // 	session_start();
-// !!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE FOR WEBSITE
 // 	$username = "s1965919";
 // 	$password = "ICTPass1670";
 // 	$database = "d1965919";
@@ -8,56 +27,6 @@
 // 	$output = array(); //stores all the items from different catogories
 // 	$output1 = array();
 // 	$output2 = array();
-
-	function getPurchases(PDO $pdo, $studentNo)
-	{
-		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
-		$stmt = $pdo->query($sql);
-		
-		return $stmt->fetchColumn();
-	}
-	
-	//gets the details of the items given Market_Id
-	function getItemDetails(PDO $pdo, $market_id)
-	{
-		$sql = "select * from MARKET_NEW where MARKET_ID='$market_id';";
-		$stmt = $pdo->query($sql);
-		
-		return $stmt->fetchColumn(2);
-	}
-
-// 	function getUserHistory($link, $studentNo) {
-// 		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
-// 		if ($pResult = mysqli_query($link, $sql)) {
-// 			$length = 0;
-// 			while ($row = $pResult->fetch_assoc()) {
-// 				$output1[] = $row;
-// 				++$length;
-// 			}
-
-// 			for ($x = 0; $x < $length; $x++) {
-// 				$data = $output1[$x]['MARKET_ID'];
-// 				$date = $output1[$x]['PURCHASE_DATE'];
-// 				if ($mResult = mysqli_query($link, "select * from MARKET_NEW where MARKET_ID='$data';")) {
-// 					while ($row = $mResult->fetch_assoc()) {
-// 						$output2[] = $row;
-// 						//array_push($output2, $date)
-// 					}
-// 				}
-// 				else
-// 					return null;
-// 			}
-
-// 			array_push($output, $output1, $output2);
-// 			echo json_encode($output);
-// 		}
-// 		else
-// 			return null;
-// 	}
-
-	
-	
-
 		
 // 	$studentNo = $_SESSION['login_user'];
 // 	if ($pResult = mysqli_query($link, "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';")) {
