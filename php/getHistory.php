@@ -23,7 +23,7 @@
 		$sql = "select * from MARKET_NEW where MARKET_ID='$market_id';";
 		$stmt = $pdo->query($sql);
 		
-		return $stmt->fetchColumn(1);
+		return $stmt->fetchColumn(2);
 	}
 
 // 	function getUserHistory($link, $studentNo) {
