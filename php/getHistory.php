@@ -9,39 +9,42 @@
 	$output1 = array();
 	$output2 = array();
 
-function work()
-{
-	return "success";	
-}
-
-function getUserHistory($link, $studentNo) {
-	$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
-	if ($pResult = mysqli_query($link, $sql)) {
-		$length = 0;
-		while ($row = $pResult->fetch_assoc()) {
-			$output1[] = $row;
-			++$length;
-		}
-	
-		for ($x = 0; $x < $length; $x++) {
-			$data = $output1[$x]['MARKET_ID'];
-			$date = $output1[$x]['PURCHASE_DATE'];
-			if ($mResult = mysqli_query($link, "select * from MARKET_NEW where MARKET_ID='$data';")) {
-				while ($row = $mResult->fetch_assoc()) {
-					$output2[] = $row;
-					//array_push($output2, $date)
-				}
-			}
-			else
-				return null;
-		}
-	
-		array_push($output, $output1, $output2);
-		echo json_encode($output);
+	fucntion getMarketIds($pdo, $studentNo)
+	{
+		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';"
+		$res = $this->pdo->query($sql);
+		
+		return $res->fetchColumn();
 	}
-	else
-		return null;
-}
+
+	function getUserHistory($link, $studentNo) {
+		$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
+		if ($pResult = mysqli_query($link, $sql)) {
+			$length = 0;
+			while ($row = $pResult->fetch_assoc()) {
+				$output1[] = $row;
+				++$length;
+			}
+
+			for ($x = 0; $x < $length; $x++) {
+				$data = $output1[$x]['MARKET_ID'];
+				$date = $output1[$x]['PURCHASE_DATE'];
+				if ($mResult = mysqli_query($link, "select * from MARKET_NEW where MARKET_ID='$data';")) {
+					while ($row = $mResult->fetch_assoc()) {
+						$output2[] = $row;
+						//array_push($output2, $date)
+					}
+				}
+				else
+					return null;
+			}
+
+			array_push($output, $output1, $output2);
+			echo json_encode($output);
+		}
+		else
+			return null;
+	}
 
 	
 	
