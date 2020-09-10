@@ -61,7 +61,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
     //test 1st column from the first row
     $first = 'Acer Asphire 1';
     
-    $this->assertEquals($first, getItemDetails($pdo, 10));
+    $this->assertEquals($first, getItemDetails($this->pdo, 10));
   }
  
 }
