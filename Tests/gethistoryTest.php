@@ -46,7 +46,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
     );
   }
   
-  public static testgetPurchases()
+  public function testgetPurchases()
   {
       global $pdo;
      //test to see that the MarketId of the value in the first row is 18
