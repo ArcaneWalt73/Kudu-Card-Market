@@ -23,7 +23,7 @@
 
     <body>
         <div class="navbar">
-            <a class="tablinks active"><i class="fa fa-fw fa-home"></i> Home</a>
+            <a onclick="clearSearch()" class="tablinks active"><i class="fa fa-fw fa-home"></i> Home</a>
             <a onclick="document.getElementById('login').style.display='block'" style="width:auto;">
                 <i class="fa fa-fw fa-user"></i> Login
             </a>
@@ -31,7 +31,7 @@
               <form id="searchForm"> 
                   <input id="searchInput" type="text"
                       placeholder=" Search..."
-                      name="searc"> 
+                      name="search" value=''> 
                   <button id="searchBtn"> 
                       <i class="fa fa-search"
                           style="font-size: 18px;"> 
@@ -106,93 +106,97 @@
             }
           </script>
           <script>
-            var div = document.getElementById("results");
-            var myData =JSON.parse(div.textContent);
-            console.log(myData[0]);
-            var home = document.getElementById("home");
-            div.setAttribute("class","row");
-            for (var i=0; i<myData.length; i++){
-                    var div1 = document.createElement("div");
-                    var div2 = document.createElement("div");
-                    div1.setAttribute("class","column");
-                    var string1 = "location.href='./item_page.php?id=";
-                    string1 = string1.concat(myData[i]['MARKET_ID'], "';");
-                    div1.setAttribute("onclick", string1);
-                    div2.setAttribute("class","card");
-                    var img = document.createElement("IMG");
-                    img.setAttribute("class", "images");
-                    img.setAttribute("src", myData[i]["IMAGE_URL"]);
-                    img.setAttribute("alt", myData[i]["NAME"]);
-                    img.setAttribute("width","210");
-                    img.setAttribute("height","170");
-                    var div3 = document.createElement("div");
-                    div3.setAttribute("class","container");
-                    var para = document.createElement("P");
-                    para.innerText = myData[i]["NAME"];
+              var div = document.getElementById("results");
+              var data =JSON.parse(div.textContent);
+              //console.log(data[0]);
+              //function to diplay items
+              var displayItems = function(myData){
+                  var home = document.getElementById("home");
 
-                    var priceDiv = document.createElement("div");
-                    priceDiv.setAttribute("class", "container");
-                    var price = document.createElement("P");
-                    price.innerText = "R" + myData[i]["PRICE"];
-                    priceDiv.appendChild(price);
+                  for (var i=0; i<myData.length; i++){
+                      var div1 = document.createElement("div");
+                      var div2 = document.createElement("div");
+                      div1.setAttribute("class","column");
+                      var string1 = "location.href='./item_page.php?id=";
+                      string1 = string1.concat(myData[i]['MARKET_ID'], "';");
+                      div1.setAttribute("onclick", string1);
+                      div2.setAttribute("class","card");
+                      var img = document.createElement("IMG");
+                      img.setAttribute("class", "images");
+                      img.setAttribute("src", myData[i]["IMAGE_URL"]);
+                      img.setAttribute("alt", myData[i]["NAME"]);
+                      img.setAttribute("width","210");
+                      img.setAttribute("height","170");
+                      var div3 = document.createElement("div");
+                      div3.setAttribute("class","container");
+                      var para = document.createElement("P");
+                      para.innerText = myData[i]["NAME"];
 
-                    div3.appendChild(para);
-                    div2.appendChild(img);
-                    div2.appendChild(div3);
-                    div2.appendChild(priceDiv);
-                    div1.appendChild(div2);
-                    home.appendChild(div1);
-            }
-            $(document).ready(function(){
-              $('#searchBtn').click(function(){
-                $.post("https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/php/search_items.php",
-                {
-                  search: document.getElementById("searchInput").value
-                },
-                function(data,status){
-                  var searchData = JSON.parse(data);
-		  sessionStorage.setItem('searchData', JSON.stringify(searchData));
-                });
-              });
-            });
-	    if(sessionStorage.length !=0){
-		var retrievedObject = sessionStorage.getItem('searchData');
-		$("#home").empty();
-		myData = JSON.parse(retrievedObject);
-		for (var i=0; i<myData.length; i++){
-                var div1 = document.createElement("div");
-                var div2 = document.createElement("div");
-                div1.setAttribute("class","column");
-                var string1 = "location.href='./item_page.php?id=";
-                string1 = string1.concat(myData[i]['MARKET_ID'], "';");
-                div1.setAttribute("onclick", string1);
-                div2.setAttribute("class","card");
-                var img = document.createElement("IMG");
-                img.setAttribute("class", "images");
-                img.setAttribute("src", myData[i]["IMAGE_URL"]);
-                img.setAttribute("alt", myData[i]["NAME"]);
-                img.setAttribute("width","210");
-                img.setAttribute("height","170");
-                var div3 = document.createElement("div");
-                div3.setAttribute("class","container");
-                var para = document.createElement("P");
-                para.innerText = myData[i]["NAME"];
+                      var priceDiv = document.createElement("div");
+                      priceDiv.setAttribute("class", "container");
+                      var price = document.createElement("P");
+                      price.innerText = "R" + myData[i]["PRICE"];
+                      priceDiv.appendChild(price);
 
-                var priceDiv = document.createElement("div");
-                priceDiv.setAttribute("class", "container");
-                var price = document.createElement("P");
-                price.innerText = "R" + myData[i]["PRICE"];
-                priceDiv.appendChild(price);
+                      div3.appendChild(para);
+                      div2.appendChild(img);
+                      div2.appendChild(div3);
+                      div2.appendChild(priceDiv);
+                      div1.appendChild(div2);
+                      home.appendChild(div1);
+                  }
+              }
+              displayItems(data);
+              //function to search
+              var searchEvent = function(event){
+                  event.preventDefault();
+                  var key = event.target.elements['search'].value;
+                  search(key);
+              }
+              var search = function(key){
+                  var tokens = key.toLowerCase().split(' ')
+                                  .filter(function(token){
+                                    return token.trim() !=='';
+                                  });
+                  if(tokens.length){
+                      var keyRegex = new RegExp(tokens.join('|'),'gim');
+                      var filteredList = data.filter(function(i){
+                          var dataString = '';
+                          for(var j in i){
+                            if(i.hasOwnProperty(j) && i[j]!==''){
+                              dataString += i[j].toString().toLowerCase().trim()+' ';
+                            }
+                          }
+                          return dataString.match(keyRegex);
 
-                div3.appendChild(para);
-                div2.appendChild(img);
-                div2.appendChild(div3);
-                div2.appendChild(priceDiv);
-                div1.appendChild(div2);
-                home.appendChild(div1);
-            }
-	    sessionStorage.clear();
-	  }
+                      });
+                      document.getElementById('home').innerHTML = "";
+                      //window.history.pushState({}, document.title, "/" + "search?"+key);
+                      if(filteredList.length==0){
+                        document.getElementById('home').innerHTML = "Ops!!!, no search results for "+key+"<br>click home to return to main page";
+                      }
+                      sessionStorage.setItem('search',key);
+                      displayItems(filteredList);
+                  }
+              };
+              //install the event listener for the search form
+              document.getElementById('searchForm').addEventListener('submit',searchEvent);
+              /*in th case the page is reloaded and we still want to keep the search results
+                get the latest search key from the sessionStorage
+              */
+              if(sessionStorage.length !=0){
+                document.addEventListener('load',search(sessionStorage.getItem('search')));
+              }
+              /* the function clears the search input and also removes the key from the sessionStorage*/
+              function clearSearch(){
+                  document.getElementById('searchInput').value = '';
+                  document.getElementById('home').innerHTML = '';
+                  sessionStorage.clear();
+                  //window.history.pushState({}, document.title, "");
+                  displayItems(data);
+              }
+              /*the end of search*/
           </script>
     </body>
 </html>
+

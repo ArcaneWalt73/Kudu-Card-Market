@@ -7,7 +7,7 @@ $database = "d1965919";
 $link = mysqli_connect("127.0.0.1", $username, $password, $database);
 
 $id = $_GET['id'];
-$response = getItemInfo($link, $id);
+$response = getItemInfo($link, $id); // array of item information
 mysqli_close($link);
 ?>
 
@@ -50,7 +50,8 @@ mysqli_close($link);
             </div-->
         </div>
 	<div id="price_div">
-		<h4><?php echo 'R '.$response['PRICE']?><h4>
+	    <h4><?php echo 'R '.$response['PRICE']?><h4>
+	    <Button>BUY</Button>
 	</div>
 
 	<div class="column">

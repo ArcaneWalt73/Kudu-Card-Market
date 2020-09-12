@@ -23,10 +23,10 @@
 
     <body>
         <div class="navbar">
-            <a class="tablinks active" onclick="main(event,'home')"><i class="fa fa-fw fa-home"></i> Home</a>
-	        <a href="./history_page.html" style="width:auto;">
+            <a href="./index.php" class="tablinks active"><i class="fa fa-fw fa-home"></i>logout</a>
+	    <a href="./history_page.html" style="width:auto;">
 		    <i class="fa fa-fw fa-user"></i>History
-            </a>
+	    </a>
             <input id="userIcon" type="image" src="images/defaultIcon.jpg" >
             <div id="cart" style="float:right">
                 <a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
