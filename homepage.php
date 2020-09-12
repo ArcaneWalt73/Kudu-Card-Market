@@ -23,7 +23,8 @@
 
     <body>
         <div class="navbar">
-           <a href="./index.php" class="tablinks active"><i class="fa fa-fw fa-home"></i>logout</a>
+        
+            <a href="./index.php" class="tablinks active"><i class="fa fa-fw fa-home"></i>logout</a>
 
 
             <a href="./history_page.html" style="width:auto;">
@@ -34,8 +35,7 @@
                 <a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
             </div>
 
-            <input id="userIcon" type="image" src="images/defaultIcon.jpg" >
-
+            <img src="../images/defaultIcon.jpg" style="dispay: inline-block;" width="44px" height="44px">
 
             <div class="search" style="float:right">
               <form id="searchForm">
@@ -49,6 +49,9 @@
                   </button>
               </form>
             </div>
+
+
+	</div>
 
 
         <div id="home" class="tabcontent"></div>
