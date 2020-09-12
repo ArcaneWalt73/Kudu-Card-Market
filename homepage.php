@@ -41,19 +41,17 @@
               <form id="searchForm"> 
                   <input id="searchInput" type="text"
                       placeholder=" Search..."
-                      name="searc"> 
-                  <button id="searchBtn"> 
+                      name="searc">
+                  <button id="searchBtn">
                       <i class="fa fa-search"
-                          style="font-size: 18px;"> 
-                      </i> 
+                          style="font-size: 18px;">
+			</i> 
                   </button> 
               </form> 
             </div>
-
 	    
  
         </div>
-
         <div id="home" class="tabcontent"></div>
 
           <script>
