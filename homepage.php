@@ -23,28 +23,33 @@
 
     <body>
         <div class="navbar">
-            <a href="./index.php" class="tablinks active"><i class="fa fa-fw fa-home"></i>logout</a>
-	    <a href="./history_page.html" style="width:auto;">
-		    <i class="fa fa-fw fa-user"></i>History
-	    </a>
-            <input id="userIcon" type="image" src="images/defaultIcon.jpg" >
-            <div id="cart" style="float:right">
+           <a href="./index.php" class="tablinks active"><i class="fa fa-fw fa-home"></i>logout</a>
+
+
+            <a href="./history_page.html" style="width:auto;">
+                    <i class="fa fa-fw fa-user"></i>History
+            </a>
+
+            <div id="cart" style="float:left">
                 <a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
             </div>
-            
-            <div class="search"> 
-              <form id="searchForm"> 
+
+            <input id="userIcon" type="image" src="images/defaultIcon.jpg" >
+
+
+            <div class="search" style="float:right">
+              <form id="searchForm">
                   <input id="searchInput" type="text"
                       placeholder=" Search..."
-                      name="searc"> 
-                  <button id="searchBtn"> 
+                      name="searc">
+                  <button id="searchBtn">
                       <i class="fa fa-search"
                           style="font-size: 18px;"> 
-                      </i> 
-                  </button> 
-              </form> 
-            </div> 
-        </div>
+                      </i>
+                  </button>
+              </form>
+            </div>
+
 
         <div id="home" class="tabcontent"></div>
 
