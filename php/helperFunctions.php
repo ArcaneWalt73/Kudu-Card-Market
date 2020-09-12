@@ -1,5 +1,5 @@
 <?php
-require 'Database.phphh';
+#require 'Database.phphh';
 /*
  * Function to retrieve an item's data when given the item's id
  */
@@ -51,8 +51,8 @@ function buyItem($link, $id, $studentID) {
 class Database1 {
 
     private $host = '127.0.0.1';
-    private $user = 'root';
-    private $pass = '';
+    private $user = 's1965919';
+    private $pass = 'ICTPass1670';
     private $dbname = 'd1965919';
 
     private $db;
@@ -73,8 +73,15 @@ class Database1 {
 
     public function query($sql){
         try{
-            $this->stmt = $this->db->exec($sql);
+            $this->stmt = $this->db->query($sql);
         }catch(PDOException $e){
+            $this->stmt = -1;
+        }
+    }
+    public function exec($sql) {
+	try {
+		$this->stmt = $this->db->exec($sql);
+	}catch(PDOException $e){
             $this->stmt = -1;
         }
     }
@@ -99,16 +106,41 @@ class HelperFunctions {
 	function getItemInfo($id){
 		//$id = mysqli_c$id;
        	$response = array();
-       	$this->database->query('SELECT * FROM MARKET_NEW WHERE MARKET_ID='.$id);
-       	if($result = $this->database->resultSet()) {
-       		$this->database->query('SELECT RATING FROM RATINGS WHERE MARKET_ID='.$id);
-       		$rating = $this->database->resultSet()
-       		echo $result;
-       		echo $rating;
+	echo "checkpoint : 1</br>";
+       	$this->database->query('SELECT * FROM `MARKET_NEW` WHERE MARKET_ID='.$id);
+	
+       	$result = $this->database->resultSet();
+	if ($result !== -1) {
+       		$this->database->query('SELECT * FROM RATINGS WHERE MARKET_ID='.$id);
+       		$rating = $this->database->resultSet();
+		echo "Checkpoint : 2</br>";
+       		$this->database->exec('SELECT * FROM RATINGS WHERE MARKET_ID='.$id);
+		echo $this->database->resultSet();
+		#echo json_encode($result->fetch());
+		echo json_encode($rating->fetch(PDO::FETCH_ASSOC));
+
+		$data = $rating->fetch();
+		$dataResult = $result->fetch();
+		//response array
+		$response['ID'] = $dataResult['MARKET_ID'];
+		$response['NAME'] = $dataResult['NAME'];
+		$response['URL'] = $dataResult['IMAGE_URL'];
+		$response['PRICE'] = $dataResult['PRICE'];
+		$response['CATEGORY'] = $dataResult['CATEGORY'];
+		$response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
+		$response['RATING'] = $data['RATING'];
+		$response['REVIEWS'] = $data['REVIEWS'];
+	        $response['ERROR'] = false;
+
+       		#echo $r1['MARKET_ID']."</br>";
+       		#echo $r2['RATING']."</br>";
+		
        		$response['ERROR'] = false;
-       		return $response;
        	}
-       	$response['ERROR'] = true;
+	else
+       		$response['ERROR'] = true;
+	echo "Checkpoint : 3</br>";
+	return $response;
 
 		/*if ($result = mysqli_query($link, "select * from MARKET_NEW where MARKET_ID='$id'")) {
 			$rating = mysqli_query($link, "select RATING from RATINGS where MARKET_ID='$id'");
@@ -135,7 +167,8 @@ class HelperFunctions {
 	 */
 	function buyItem($id, $studentNo, $password) {
 		$this->database->query('SELECT KUDU_BUCKS, PASSWORD FROM STUDENTS WHERE STUDENT_NO='.$studentNo);
-		if ($result = $this->database->resultSet()) {
+		$result = $this->database->resultSet()
+		if ($result !== -1) {
 			echo $result;
 			$row = $result->fetchAll(PDO::FETCH_ASSOC);
 			echo $row['PASSWORD'];
