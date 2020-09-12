@@ -1,51 +1,74 @@
 <?php
+session_start();
+class Database {
+
+    private $host = '127.0.0.1';
+    private $user = 'root';
+    private $pass = '';
+    private $dbname = 'd1965919';
+
+    private $db;
+    private $stmt;
+    private $testPassword;
+    private $testUser;
+    private $error;
+
+    public function __construct(){
+        // Set DSN
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+        $options = array(
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
+
+        // Create PDO instance
+        $this->db = new PDO($dsn, $this->user, $this->pass, $options);
+    }
+
+    public function query($sql){
+        $this->stmt = $this->db->prepare($sql);
+        $this->execute();
+    }
+
+    public function execute(){
+        return $this->stmt->execute();
+    }
+
+    public function resultSet(){
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+}
 class login{
     private $studentNo;
     private $password1;
+    private $database;
     public function __construct($stud, $pass){
         $this->studentNo = $stud;
         $this->password1 = $pass;
+        $this->database = new Database;
+    }
+
+    public function getAllTasks() {
+        $this->database->query('SELECT PASSWORD FROM STUDENTS where STUDENT_NO='.$this->studentNo);
+        $results = $this->database->resultSet();
+        return $results;
     }
 
     public function doLogin(){
-        $username = "s1965919";
-        $password = "ICTPass1670";
-        $database = "d1965919";
-        $link = mysqli_connect('127.0.0.1', $username, $password, $database);
-        $stdNo = mysqli_real_escape_string($link,$this->studentNo);
-        $pass = mysqli_real_escape_string($link,$this->password1);
-        session_start();
-        if ($result = mysqli_query($link, "select PASSWORD from STUDENTS where STUDENT_NO='$stdNo';")){
-            $hashed = $result->fetch_assoc()['PASSWORD'];
-            if(!empty($pass) && password_verify($pass,$hashed)){
-                $_SESSION['login_user'] = $stdNo;
-                mysql_close($link);
-                return true; //success
+        if ($result = $this->getAllTasks()){
+            $hashed = $result[0]['PASSWORD'];
+            if(!empty($this->password1) && password_verify($this->password1,$hashed)){
+                $_SESSION['login_user'] = $this->studentNo;
+                return true;
             }
             else{
                 //header("location: ../homepage.php");
-                mysqli_close($link);
                 return false; // wrong password
             }
         }
-        mysql_close($link);
-        return false; // account does not exist
+        //return false; // account does not exist
     }
 }
-$user = new login($_POST["studentNumber"],$_POST["password"]);
-if($user->doLogin()){
-    header('location: ../homepage.php');
-}
-else{
-    header('location: ../index.php');
-}
-
-/*$user = new login($_POST["studentNumber"],$_POST["password"]);
-$var = $user->doLogin();
-if($user->doLogin()){
-    header('location: ../homepage.php');
-}
-else{
-    header('location: ../index.php');
-}*/
 ?>

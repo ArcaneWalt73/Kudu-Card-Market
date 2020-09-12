@@ -1,8 +1,8 @@
 <?php
-require_once '../php/Database.php';
-require_once '../php/login.php';
+//include 'php/Database.php';
+include 'php/login.php';
 
-  class testLogin extends PHPUnit\Framework\TestCase {
+  class loginTest extends PHPUnit\Framework\TestCase {
 
     public function testGetAllTasks() {
 
