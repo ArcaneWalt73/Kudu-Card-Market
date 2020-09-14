@@ -154,7 +154,7 @@ class HelperFunctions {
 	 */
 	function buyItem($id, $studentNo) {
 		$this->database->query('SELECT KUDU_BUCKS FROM STUDENTS WHERE STUDENT_NO='.$studentNo);
-		$result = $this->database->resultSet()
+		$result = $this->database->resultSet();
 		$this->database->query('SELECT * FROM MARKET_NEW WHERE MARKET_ID='.$id);
 		$itemResult = $this->database->resultSet();
 		if ($result !== -1 && $itemResult !== -1) {
@@ -172,13 +172,13 @@ class HelperFunctions {
 					if($this->database->resultSet() !== 0)
 						return 0;
 					else
-						return 1
+						return 1;
 				}
 				else
-					return 2
+					return 2;
 			}
 			else
-				return 3
+				return 3;
 		}
 	}
 
