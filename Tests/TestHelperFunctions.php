@@ -25,6 +25,7 @@ require_once '../php/helperFunctions.php';
       $actualResult =  $task->getAllTasks();
       $this->assertEquals($dbase->resultSet()[0], $actualResult[0]);
     }
+  }
 
 
 ?>

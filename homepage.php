@@ -38,7 +38,6 @@
 		<script>
 			var username = JSON.parse("<?php
         			include('php/getUser.php');
-				echo json_encode($user);
 				?>");
 			console.log("username: "+username);
 		</script>
