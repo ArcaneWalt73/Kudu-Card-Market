@@ -1,11 +1,11 @@
-<div id="results" style="display: none;">
+<!--<div id="results" style="display: none;">
     <?php
         include('php/getItem.php');
         #echo $_SESSION['login_user'];_
         #include('php/session.php');
         // Insert session checker
     ?>
-</div>
+</div>-->
 
 <!DOCTYPE html>
 <html>
@@ -35,6 +35,13 @@
 
             <div id="cart" style="float:left">
                 <a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
+		<script>
+			var username = JSON.parse("<?php
+        			include('php/getUser.php');
+				echo json_encode($user);
+				?>");
+			console.log("username: "+username);
+		</script>
             </div>
 
             <img src="images/defaultIcon.jpg" style="dispay: inline-block;" width="44px" height="44px">

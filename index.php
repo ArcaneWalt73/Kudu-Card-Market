@@ -16,7 +16,6 @@
 	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/homepage.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="./js/username.js"></script>
 
         <!-- Awesome Font CDN -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
@@ -59,7 +58,7 @@
                 <input style="border-radius:15px 15px 15px 15px;" type="password" placeholder="Enter Password" name="password" required>
 
 	 
-                <button style="border-radius:15px 15px 15px 15px;" type="submit" /*onClick="Username()"*/>Login</button>
+                <button style="border-radius:15px 15px 15px 15px;" type="submit"">Login</button>
               </div>
 
               <div class="container" style="background-color:#1e376c">
@@ -98,14 +97,6 @@
             </form>
           </div>
 
-          <script>
-		/*import {setUername, getUsername} from "./js/username.js";
-		function Username(){
-                	setUsername(document.getElementById("studentNumber").innerHTML);
-		}*/
-		console.log(document.getElementById("studentNumber").innerHTML);
-                //console.log(getUsername()+" U");
-          </script>
           <script>
             // Get the modal
             var modal = document.getElementById('login');
