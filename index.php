@@ -16,9 +16,11 @@
 	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/homepage.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="./js/username.js"></script>
 
         <!-- Awesome Font CDN -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
     </head>
 
     <body>
@@ -56,7 +58,8 @@
 
                 <input style="border-radius:15px 15px 15px 15px;" type="password" placeholder="Enter Password" name="password" required>
 
-                <button style="border-radius:15px 15px 15px 15px;" type="submit">Login</button>
+	 
+                <button style="border-radius:15px 15px 15px 15px;" type="submit" /*onClick="Username()"*/>Login</button>
               </div>
 
               <div class="container" style="background-color:#1e376c">
@@ -74,7 +77,7 @@
               </div>
 
               <div class="container">
-                <input style="border-radius:15px 15px 15px 15px;" type="text" placeholder="Enter Username" name="studentNumber" required>
+                <input style="border-radius:15px 15px 15px 15px;" type="text" placeholder="Enter Username" name="studentNumber" id="studentNumber" required>
 
                 <input style="border-radius:15px 15px 15px 15px;" type="password" placeholder="Enter Password" name="password" required>
 
@@ -95,6 +98,14 @@
             </form>
           </div>
 
+          <script>
+		/*import {setUername, getUsername} from "./js/username.js";
+		function Username(){
+                	setUsername(document.getElementById("studentNumber").innerHTML);
+		}*/
+		console.log(document.getElementById("studentNumber").innerHTML);
+                //console.log(getUsername()+" U");
+          </script>
           <script>
             // Get the modal
             var modal = document.getElementById('login');
@@ -185,6 +196,7 @@
                 get the latest search key from the sessionStorage
               */
               if(sessionStorage.length !=0){
+		document.getElementById('searchInput').value = sessionStorage.getItem('search');
                 document.addEventListener('load',search(sessionStorage.getItem('search')));
               }
               /* the function clears the search input and also removes the key from the sessionStorage*/

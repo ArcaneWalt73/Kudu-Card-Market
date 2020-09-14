@@ -1,10 +1,9 @@
 <?php
 session_start();
-class Database {
-
+class Database {//the user details need not to be the same ones from git, as those are used for testing
     private $host = '127.0.0.1';
-    private $user = 'root';
-    private $pass = '';
+    private $user = 's1965919';
+    private $pass = 'ICTPass1670';
     private $dbname = 'd1965919';
 
     private $db;
@@ -70,5 +69,11 @@ class login{
         }
         //return false; // account does not exist
     }
+}
+$user = new login($_POST["studentNumber"],$_POST["password"]);
+if($user->doLogin()){
+	header('location:../homepage.php');
+}else{
+	header('location:../index.php');
 }
 ?>
