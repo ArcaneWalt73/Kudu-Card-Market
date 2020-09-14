@@ -167,7 +167,7 @@ class HelperFunctions {
 	 */
 	function buyItem($id, $studentNo, $password) {
 		$this->database->query('SELECT KUDU_BUCKS, PASSWORD FROM STUDENTS WHERE STUDENT_NO='.$studentNo);
-		$result = $this->database->resultSet()
+		$result = $this->database->resultSet();
 		if ($result !== -1) {
 			echo $result;
 			$row = $result->fetchAll(PDO::FETCH_ASSOC);
