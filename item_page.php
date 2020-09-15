@@ -1,14 +1,11 @@
 <?php
 include("./php/helperFunctions.php");
 
-$username = "s1965919";
-$password = "ICTPass1670";
-$database = "d1965919";
-$link = mysqli_connect("127.0.0.1", $username, $password, $database);
+session_start();
+$helper = new HelperFunctions;
 
 $id = $_GET['id'];
-$response = getItemInfo($link, $id); // array of item information
-mysqli_close($link);
+$response = $helper->getItemInfo($id);
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +56,12 @@ mysqli_close($link);
 			<img alt="Item image" id="image" width="500" height="400" src=<?php echo $response['URL']; ?>>;
 		</div>
 		<div id="item_info" class="container">
+			<h6>DESCRIPTION</h6>
 			<p id="item_info"><?php echo $response['DESCRIPTION']?></p>
+		</div>
+		<div id="item_info" class='container'>
+			<h6>QTY:</h6>
+			<p><?php echo $response['QTY']?></p>
 		</div>
 	</div>
 
