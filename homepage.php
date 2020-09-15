@@ -17,7 +17,7 @@
     <body>
         <div class="navbar">
             <a onclick="clearSearch()" class="tablinks active"><i class="fa fa-fw fa-home"></i> Home</a>
-            <a href="./index.php" class="tablinks">
+            <a href="./logout.php" class="tablinks">
 		<i class="fa fa-fw fa-home" style="color:white"></i> logout
 	    </a>
 
