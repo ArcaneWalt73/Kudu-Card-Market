@@ -1,11 +1,44 @@
 <?php
+#include("./php/getUser.php");
 include("./php/helperFunctions.php");
+include("./php/sessionHelper.php");
 
-session_start();
 $helper = new HelperFunctions;
-
+#echo $name;
 $id = $_GET['id'];
 $response = $helper->getItemInfo($id);
+
+$resp = getUserSession();
+
+
+/*if ($response['ERROR'] === true)
+	if (isset($name))
+		header("location: ../homepage.php");
+	else
+		header("location: ../index.php");
+*/
+$message = "please login first";
+if(isset($_POST['buy_btn'])) { 
+	if ($resp['code'] === 0) {
+		#echo $resp['name'];
+		if ($helper->buyItem($id, $resp['name']) === 0)
+			$message = "Transaction Successfull";
+		else
+			$message = "Transaction Failed";
+		echo "
+			<script type='text/javascript'>
+				alert('$message');
+				window.location.replace('./homepage.php');
+			</script>" ;
+	} else {
+		#echo "set user";
+		echo "
+			<script type='text/javascript'>
+				alert('$message');
+				window.location.replace('./index.php');
+			</script>" ;
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +81,6 @@ $response = $helper->getItemInfo($id);
         </div>
 	<div id="price_div">
 	    <h4><?php echo 'R '.$response['PRICE']?><h4>
-	    <Button>BUY</Button>
 	</div>
 
 	<div class="column">
@@ -62,6 +94,11 @@ $response = $helper->getItemInfo($id);
 		<div id="item_info" class='container'>
 			<h6>QTY:</h6>
 			<p><?php echo $response['QTY']?></p>
+		</div>
+		<div id="item_info" class="container">
+			<form method="post"> 
+        			<input type="submit" name="buy_btn" value="BUY"/>
+			</form>
 		</div>
 	</div>
 
