@@ -1,4 +1,4 @@
 <?php
         session_start();
-        echo $_SESSION['login_user'];
+        $name = $_SESSION['login_user'];
 ?>
