@@ -48,7 +48,7 @@ class register{
         $this->studentNo = $stud;
         $this->fname = $fname;
         $this->lname = $lname;
-        $this->password1 = $pass;
+        $this->password1 = password_hash($pass,PASSWORD_DEFAULT);
         $this->email = $email;
         $this->cellNo = $cellNo;
         $this->database = new Database1;

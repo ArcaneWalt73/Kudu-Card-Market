@@ -70,10 +70,12 @@ class login{
         //return false; // account does not exist
     }
 }
-$user = new login($_POST["studentNumber"],$_POST["password"]);
-if($user->doLogin()){
-	header('location:../homepage.php');
-}else{
-	header('location:../index.php');
-}
+    $username = $_POST["studentNumber"];
+    $password = $_POST["password"];
+    $user = new login($username,$password);
+    if($user->doLogin()){
+        header('location:../homepage.php');
+    }else{
+        header('location:../index.php');
+    }
 ?>
