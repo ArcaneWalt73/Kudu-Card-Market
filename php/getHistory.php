@@ -2,7 +2,7 @@
 
 function getPurchases(PDO $pdo, $studentNo)
 {
-	$sql = "select MARKET_ID, PURCHASE_DATE from PURCHASES where STUDENT_NO='$studentNo';";
+	$sql = "select * from PURCHASES where STUDENT_NO='$studentNo';";
 	$stmt = $pdo->query($sql);
 
 	return $stmt->fetchColumn();

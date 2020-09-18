@@ -1,11 +1,3 @@
-<!--<div id="results" style="display: none;">
-    <?php
-        include('php/getItem.php');
-        #echo $_SESSION['login_user'];_
-        #include('php/session.php');
-        // Insert session checker
-    ?>
-</div>-->
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +16,7 @@
     <body>
         <div class="navbar">
             <a onclick="clearSearch()" class="tablinks active"><i class="fa fa-fw fa-home"></i> Home</a>
-            <a href="./index.php" class="tablinks">
+            <a href="./logout.php" class="tablinks">
 		<i class="fa fa-fw fa-home" style="color:white"></i> logout
 	    </a>
 
@@ -35,11 +27,13 @@
 
             <div id="cart" style="float:left">
                 <a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
+		<a style="width:auto"><b id="username"></b></a>
 		<script>
-			var username = JSON.parse("<?php
+			var username = "<?php
         			include('php/getUser.php');
-				?>");
-			console.log("username: "+username);
+				echo $name;
+				?>";
+			document.getElementById("username").innerHTML = username;
 		</script>
             </div>
 
@@ -61,6 +55,12 @@
         </div>
         
         <div id="home" class="tabcontent"></div>
+	<div id="results" style="display: none;">
+          <?php
+        	include('php/getItem.php');
+        	// Insert session checker
+    	  ?>
+	</div>
 
           <script>
             // Get the modal
@@ -164,6 +164,7 @@
                   displayItems(data);
               }
               /*the end of search*/
+	     
           </script>
     </body>
 </html>
