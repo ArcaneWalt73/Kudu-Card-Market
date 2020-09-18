@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -164,7 +163,6 @@
                   displayItems(data);
               }
               /*the end of search*/
-	     
           </script>
     </body>
 </html>
