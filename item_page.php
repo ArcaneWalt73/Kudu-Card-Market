@@ -1,5 +1,5 @@
 <?php
-#include("./php/getUser.php");
+#include("./php/getUser.php");i
 include("./php/helperFunctions.php");
 include("./php/sessionHelper.php");
 
@@ -42,15 +42,11 @@ if(isset($_POST['buy_btn'])) {
 ?>
 
 <!DOCTYPE html>
-<html lan="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Kudu Mart</title>
 
-	<!-- BootStrap CDN -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 	<!-- FontAwesome -->
 	<script src="https://kit.fontawesome.com/e351a758ee.js" crossorigin="anonymous"></script>
@@ -64,8 +60,64 @@ if(isset($_POST['buy_btn'])) {
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
+	<!-- Navbar CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/navbar_.css">
+	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/dropbox.css">
+	
+
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	
 </head>
 <body>
+
+	<div class="navbar">
+		<a href="./homepage.php" class="tablinks active"><i class="fa fa-fw fa-home"></i>Home</a>
+
+           
+		<div id="cart" style="float:left; color:white">
+			<a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
+	        </div>
+	
+	
+		<div class="dropdown">
+	                 <button class="dropbtn" style="width:auto;"><b id="username"> <?php echo $resp['name'] ?> 
+               		 </b>
+               		 <i class="fa fa-caret-down"></i>
+               		 </button>
+               		 <div class="dropdown-content">
+
+                       		 <a>Balance: R<b id="balance"> <script>
+                       			 var balance = "<?php
+                               		 include('php/getBalance.php');
+                               		 echo $login_balance;
+                               		 ?>";
+                       			 document.getElementById("balance").innerHTML = balance;
+                       			 </script>        
+                       			 </b>
+				 </a>
+
+                        <a href="./history_page.html">
+                       		 <i class="fa fa-fw fa-user"></i>History
+                        </a>
+
+                        <a href="./logout.php" class="tablinks">
+                       		 <i class="fa fa-fw fa-home"></i> logout
+                        </a>
+
+                </div>
+            </div>
+		
+	<img src="images/defaultIcon.jpg" style="dispay: inline-block;" width="44px" height="44px">
+         
+ 
+        </div>	
+
+	
+
         <div id = "name_div" class="item-title" >
             <!--i class="fa fa-shopping-bag"></i--><h1 id="name"><?php echo $response['NAME'] ?></h1>
             <!--a class="tablinks" onclick="main(event,'search')"><i class="fa fa-fw fa-search"></i> Search</a>
@@ -127,6 +179,17 @@ if(isset($_POST['buy_btn'])) {
 		info.innerText = myData['DESCRIPTION'];
 		price.innerText = myData['PRICE'];*/
 	</script>
+
+          <script>
+            // Get the modal
+            var modal = document.getElementById('login');
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+          </script>
 
 </body>
 </html>
