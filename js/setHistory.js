@@ -23,32 +23,38 @@ $(document).ready //only excecutes after document has loaded
 		function(data)
 		{
 			var json = JSON.parse(data); //turn the json string into an array of json objects
- 
-		        var listOfObjs1 = json[0]; 
-		        var listOfObjs2 = json[1]; //detailed columns
-		
-		
-		        //table in the history html
-		        var table = document.getElementById("history_table");
-		
-		        for(var i = 0; i < listOfObjs2.length; ++i) //for each history entry
-		        {
-		            //empty <tr> element as the ith row
-		            var row = table.insertRow(i+1);
-		
-		            //add empty columns
-		            var product_col = row.insertCell(0);
-		            var amnt_col = row.insertCell(1);
-		            var purchDate_col = row.insertCell(2);
-		            var desc_col = row.insertCell(3);
-		            
-		            //set the respective values
-		            product_col.innerHTML = listOfObjs2[i].NAME;
-		            amnt_col.innerHTML = listOfObjs2[i].PRICE;
-		            purchDate_col.innerHTML = listOfObjs1[i].PURCHASE_DATE;
-		            desc_col.innerHTML = listOfObjs2[i].DESCRIPTION;
-		        }
-		
+			if(json.length > 0)
+			{	
+		        	//table in the history html
+			        var table = document.getElementById("history_table");
+			
+			        for(var i = 0; i < json.length; ++i) //for each history entry
+			        {
+			            //empty <tr> element as the ith row
+			            var row = table.insertRow(i+1);
+			
+			            //add empty columns
+			            var product_col = row.insertCell(0);
+			            var amnt_col = row.insertCell(1);
+			            var purchDate_col = row.insertCell(2);
+			            var desc_col = row.insertCell(3);
+			            
+			            //set the respective values
+			            product_col.innerHTML = json[i].NAME;
+			            amnt_col.innerHTML = json[i].PRICE;
+			            purchDate_col.innerHTML = json[i].PURCHASE_DATE;
+			            desc_col.innerHTML = json[i].DESCRIPTION;
+			        }
+			}else
+			{
+				var table = document.getElementById("history_table");
+				table.deleteRow(0);
+				var row = table.insertRow(0);
+				var desc_col = row.insertCell(0);
+				desc_col.innerHTML = ":( Oh my, you haven't made a purchase yet!";
+	
+			}		
+			
 		}
 	);
     }
