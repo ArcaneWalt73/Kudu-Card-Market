@@ -3,6 +3,7 @@ include "helperFunctions.php";
 
 $helper = new HelperFunctions;
 $response = $helper->getItemInfo(-1);
+$$r2 = $helper->getAllItems();
 echo json_encode($response);
 echo "Checkpoint: 1</br>";
 

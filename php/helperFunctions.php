@@ -119,6 +119,41 @@ class HelperFunctions {
 	}
 
 	/*
+	 * Function to retrieve all items from the marketplace;
+	 */
+	function getAllItems() {
+		$this->database->query(
+			"SELECT * FROM MARKET_NEW");
+		$result = $this->database->resultSet();
+		if ($result !== -1) {
+			$this->database->query( // retrieve item rating from ratings table
+				'SELECT * FROM RATINGS');
+			$rating = $this->database->resultSet();
+
+			$items = array();
+			while ($dataResult = $result->fetch(PDO::FETCH_ASSOC)) {
+				$data = $rating->fetch(PDO::FETCH_ASSOC);
+
+				$response['ID'] = $dataResult['MARKET_ID'];
+				$response['NAME'] = $dataResult['NAME'];
+				$response['URL'] = $dataResult['IMAGE_URL'];
+				$response['PRICE'] = $dataResult['PRICE'];
+				$response['CATEGORY'] = $dataResult['CATEGORY'];
+				$response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
+				$response['QTY'] = $dataResult['QTY'];
+				$response['RATING'] = $data['RATING'];
+				$response['REVIEWS'] = $data['REVIEWS'];
+
+				$items[] = $response;
+			}
+			echo json_encode($items);
+			//response array
+			return $items;
+		}
+		return -1;
+	}
+
+	/*
 	 * Function to buy an Item
 	 * Returns :
 	 *		0 - Success
@@ -283,8 +318,8 @@ class HelperFunctions {
 		} else {
 			$item = getItemInfo($itemID);
 			if ($item['ERROR'] == false) {
-				$qty = $item['QTY'];
-				$qty += 1;
+				$qty2 = $item['QTY'];
+				$qty += $qty2;
 				$this->database->exec(
 					"UPDATE table MARKET_NEW set QTY='$qty' where MARKET_ID='$itemID'");
 				if ($this->database->resultSet() !== 0)
