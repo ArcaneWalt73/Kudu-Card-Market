@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 class Database {//the user details need not to be the same ones from git, as those are used for testing
     private $host = '127.0.0.1';
     private $user = 's1965919';
