@@ -86,10 +86,35 @@ class HelperFunctions {
 			$response['QTY'] = $dataResult['QTY'];
 			$response['RATING'] = $data['RATING'];
 			$response['REVIEWS'] = $data['REVIEWS'];
-		    $response['ERROR'] = false;
+			$response['ERROR'] = false;
 			return $response;
 		} else
-	       	$response['ERROR'] = true;
+	       		$response['ERROR'] = true;
+		return $response;
+	}
+
+	/*
+	 * Function to retrieve an item's data from the cart
+	 */
+	function getItemInfoFromCart($id){
+		$response = array();
+		$this->database->query( // Retrieve item info from database
+			'SELECT * FROM CART WHERE MARKET_ID='.$id.' LIMIT 1');
+		$result = $this->database->resultSet();
+
+		if ($result !== -1) {
+			$dataResult = $result->fetch(PDO::FETCH_ASSOC);
+			//response array
+			$response['ID'] = $dataResult['MARKET_ID'];
+			$response['NAME'] = $dataResult['NAME'];
+			$response['URL'] = $dataResult['IMAGE_URL'];
+			$response['PRICE'] = $dataResult['PRICE'];
+			$response['CATEGORY'] = $dataResult['CATEGORY'];
+			$response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
+			$response['ERROR'] = false;
+			return $response;
+		} else
+	       		$response['ERROR'] = true;
 		return $response;
 	}
 
@@ -313,7 +338,7 @@ class HelperFunctions {
 		$desc = $response['DESCRIPTION'];
 
 		$this->database->exec(
-			"DELETE FROM CART WHERE MARKET_ID='$itemID' LIMIT 1");
+			"DELETE FROM CART WHERE MARKET_ID='$itemID' AND STUDENT_NO='$studentNo' LIMIT 1");
 		if ($this->database->resultSet() === 1) {
 			$result = addItem($itemId, $name, $price, $cate, $desc, $url, 1);
 			if ($result === 0)
