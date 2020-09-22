@@ -1,28 +1,4 @@
 <?php
-#require 'Database.phphh';
-/*
- * Function to retrieve an item's data when given the item's id
- *
-function getItemInfo($link, $id){
-	#echo $id;
-       	$response = array();
-	if ($result = mysqli_query($link, "select * from MARKET_NEW where MARKET_ID='$id'")) {
-		$rating = mysqli_query($link, "select RATING from RATINGS where MARKET_ID='$id'");
-		$data = $rating->fetch_assoc();
-		$dataResult = $result->fetch_assoc();
-
-	        //response array
-        	$response['ID'] = $dataResult['MARKET_ID'];
-		$response['NAME'] = $dataResult['NAME'];
-		$response['URL'] = $dataResult['IMAGE_URL'];
-		$response['PRICE'] = $dataResult['PRICE'];
-		$response['CATEGORY'] = $dataResult['CATEGORY'];
-		$response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
-        	$response['ERROR'] = false;
-		return $response;
-        }
-       	$response['ERROR'] = true;
-}*/
 
 class Database1 {
 
@@ -88,21 +64,15 @@ class HelperFunctions {
 	 * Function to retrieve an item's data when given the item's id
 	 */
 	function getItemInfo($id){
-		//$id = mysqli_c$id;
-       		$response = array();
-#		echo "checkpoint : 1</br>";
-
-	    	$this->database->query('SELECT * FROM `MARKET_NEW` WHERE MARKET_ID='.$id);
-	    	$result = $this->database->resultSet();
+		$response = array();
+		$this->database->query( // Retrieve item info from database
+			'SELECT * FROM `MARKET_NEW` WHERE MARKET_ID='.$id);
+		$result = $this->database->resultSet();
 
 		if ($result !== -1) {
-	       		$this->database->query('SELECT * FROM RATINGS WHERE MARKET_ID='.$id);
-       			$rating = $this->database->resultSet();
-#			echo "Checkpoint : 2</br>";
-	       		#$this->database->exec('SELECT * FROM RATINGS WHERE MARKET_ID='.$id);
-			#echo $this->database->resultSet();
-			#echo json_encode($result->fetch());
-			#echo json_encode($rating->fetch(PDO::FETCH_ASSOC));
+			$this->database->query( // retrieve item rating from ratings table
+				'SELECT * FROM RATINGS WHERE MARKET_ID='.$id);
+			$rating = $this->database->resultSet();
 
 			$data = $rating->fetch(PDO::FETCH_ASSOC);
 			$dataResult = $result->fetch(PDO::FETCH_ASSOC);
@@ -116,22 +86,12 @@ class HelperFunctions {
 			$response['QTY'] = $dataResult['QTY'];
 			$response['RATING'] = $data['RATING'];
 			$response['REVIEWS'] = $data['REVIEWS'];
-		        $response['ERROR'] = false;
-
-	       		#echo $r1['MARKET_ID']."</br>";
-	       		#echo $r2['RATING']."</br>";
-			
-	       		$response['ERROR'] = false;
-			#$this->database->close();
+		    $response['ERROR'] = false;
 			return $response;
-	       	}
-		else
-	       		$response['ERROR'] = true;
-#		echo "Checkpoint : 3</br>";
-		#$this->database->close();
+		} else
+	       	$response['ERROR'] = true;
 		return $response;
 	}
-
 
 	/*
 	 * Function to buy an Item
@@ -143,17 +103,15 @@ class HelperFunctions {
 	 *		4 - Item does not exit
 	 */
 	function buyItem($itemID, $studentNo) {
-#		echo "C : 1\n";
-		$this->database->query('SELECT KUDU_BUCKS FROM `STUDENTS` WHERE STUDENT_NO='.$studentNo);
+		$this->database->query( // Retrieve student credit points
+			'SELECT KUDU_BUCKS FROM `STUDENTS` WHERE STUDENT_NO='.$studentNo);
 		$result = $this->database->resultSet();
 
 		if ($result !== -1) {
 			$row = $result->fetch(PDO::FETCH_ASSOC);
-#		echo "C : 2\n";
-		$this->database->query('SELECT * FROM `MARKET_NEW` WHERE MARKET_ID='.$itemID);
+		$this->database->query( // Retrieve item info
+			'SELECT * FROM `MARKET_NEW` WHERE MARKET_ID='.$itemID);
 		$itemResult = $this->database->resultSet();
-#		echo "C : 3\n";
-		#echo $itemResult->fe;
 		if ($itemResult !== -1) {
 			$col = $itemResult->fetch(PDO::FETCH_ASSOC);
 			$kudu = $row['KUDU_BUCKS'];
@@ -166,31 +124,27 @@ class HelperFunctions {
 			$price = $col['PRICE'];
 			$cate = $col['CATEGORY'];
 			$desc = $col['DESCRIPTION'];
-#			echo "C : 4\n";
         	
 			if ($kudu >= $amount && $qty >= 1) {
-#				echo "C : 5\n";
 				$current_Amount = $kudu - $amount; // the amount after payments
 				$qty = $qty - 1;
-				$this->database->exec('UPDATE STUDENTS SET KUDU_BUCKS='.$current_Amount.' WHERE STUDENT_NO='.$studentNo);
+				
+				$this->database->exec(
+					'UPDATE STUDENTS SET KUDU_BUCKS='.$current_Amount.' WHERE STUDENT_NO='.$studentNo);
 				if($this->database->resultSet() !== 0){
-#					echo "C : 6\n";
-					
 					$this->database->exec(
 						"INSERT INTO PURCHASES(
 							STUDENT_NO, MARKET_ID, IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, PURCHASE_DATE) 
 						VALUES('$studentNo', '$itemID', '$url', '$name', '$price', '$cate', '$desc', CURRENT_DATE);");
 					$purchaseResult = $this->database->resultSet();
+					
 					$this->database->exec(
 						"UPDATE MARKET_NEW SET QTY='$qty' WHERE MARKET_ID='$itemID'");
 					$qtyResult = $this->database->resultSet();
 					if ($qty === 0)
 						$this->removeItem($itemID);
 					if($purchaseResult !== 0)
-					{
-#						echo "C : 7\n";
 						return 0;
-					}
 					else
 						return 1;
 				}
