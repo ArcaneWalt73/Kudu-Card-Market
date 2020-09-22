@@ -17,11 +17,11 @@ function getItemDetails(PDO $pdo, $market_id)
 	return $stmt->fetchColumn(2);
 }
 
-//!!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE IT  FOR WEBSITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/*!!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE IT  FOR WEBSITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	session_start();
-	$username = "root";
-	$password = "";
+	$username = "s1965919";
+	$password = "ICTPass1670";
 	$database = "d1965919";
 	$link = mysqli_connect("127.0.0.1", $username, $password, $database);
 	$output = array(); //stores all the items from different catogories
@@ -38,5 +38,5 @@ function getItemDetails(PDO $pdo, $market_id)
 		echo json_encode($output);
 	}
 	else
-	     	echo json_encode("failed");
+	     	echo json_encode("failed");*/
 	?>
