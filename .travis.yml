@@ -1,6 +1,7 @@
 branches:
   only:
     - master
+    - testing-sidestep
 sudo: required
 language: php
 php:
