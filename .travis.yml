@@ -12,7 +12,7 @@ services:
   
 before_script:
   - mysql -e "create database IF NOT EXISTS d1965919;"
-  - mysql -u root --password="" < Tests/travis.sql
+  - mysql -u s1965919 --password="ICTPass1670" < Tests/travis.sql
   
 script:
  - phpunit --configuration phpunit.xml --testsuite PHPTests --coverage-text --coverage-clover=coverage.xml
