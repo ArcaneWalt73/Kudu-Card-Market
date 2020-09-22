@@ -77,6 +77,10 @@ class HelperFunctions {
 			$data = $rating->fetch(PDO::FETCH_ASSOC);
 			$dataResult = $result->fetch(PDO::FETCH_ASSOC);
 			//response array
+			if (!isset($dataResult['MARKET_ID'])) {
+				$response['ERROR'] = true;
+				return $response;
+			}
 			$response['ID'] = $dataResult['MARKET_ID'];
 			$response['NAME'] = $dataResult['NAME'];
 			$response['URL'] = $dataResult['IMAGE_URL'];
