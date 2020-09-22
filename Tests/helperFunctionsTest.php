@@ -17,7 +17,7 @@ class testHelper extends PHPUnit\Framework\TestCase {
     $url = "https://lamp.ms.wits.ac.za/~s1965919/uploads/25.png";
     $price = 20.00;
     $cate = "Resource";
-    $desc = "Sprite Image for Pacman Game"
+    $desc = "Sprite Image for Pacman Game";
     $qty = 10;
 
     $helper = new helperFunctions;
