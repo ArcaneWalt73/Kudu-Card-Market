@@ -23,22 +23,82 @@ class testHelper extends PHPUnit\Framework\TestCase {
     $helper = new helperFunctions;
     $result = $helper->addItem(-1, $name, $price, $cate, $desc, $url, $qty);
 
+    $this->assertEquals($result, 0);    
+
+    $items = $helper->getAllItems();
+    $first = $items[0];
+
+    $this->assertEquals($first['NAME'], $name);
+    $this->assertEquals($first['URL'], $url);
+    $this->assertEquals($first['PRICE'], $price);
+    $this->assertEquals($first['CATEGORY'], $cate);
+    $this->assertEquals($first['DESCRIPTION'], $desc);
+
+    // Check if QTY is added
+
+    $result = $helper->addItem($first['ID'], $name, $price, $cate, $desc, $url, 1);
+    $this->assertEquals($result, 0);
+
+    $items = $helper->getAllItems();
+    $first = $items[0];
+
+    $this->assertEquals($first['NAME'], $name);
+    $this->assertEquals($first['URL'], $url);
+    $this->assertEquals($first['PRICE'], $price);
+    $this->assertEquals($first['CATEGORY'], $cate);
+    $this->assertEquals($first['DESCRIPTION'], $desc);
+    $qty += 1;
+    $this->assertEquals($first['QTY'], $qty);
   }
 
   public function testGetItemInfo() {
-
-    $id = 25;
+    $name = "Pacman Sprite";
+    $url = "https://lamp.ms.wits.ac.za/~s1965919/uploads/25.png";
+    $price = 20.00;
+    $cate = "Resource";
+    $desc = "Sprite Image for Pacman Game"
+    $qty = 10;
 
     $helper = new helperFunctions;
+    $result = $helper->addItem(-1, $name, $price, $cate, $desc, $url, $qty);
 
+    $output = getItemInfo(-1); // Test non-existent item
+    $this->assertEquals($output['ERROR'], true);
 
-    $dbase = $this->getMockBuilder('Database1')->getMock();
-    $dbase->method('resultSet')->will($this->returnValue($table));
-    //$expectedResult = ['PASSWORD' => '123'];
-  
-    $task = getItemInfo();
-    $actualResult =  $task->getAllTasks();
-    $this->assertEquals($dbase->resultSet()[0], $actualResult[0]);
+    $output = getItemInfo(0);
+    $this->assertEquals($output['ERROR'], false);
+    $this->assertEquals($output['NAME'], $name);
+    $this->assertEquals($output['URL'], $url);
+    $this->assertEquals($output['PRICE'], $price);
+    $this->assertEquals($output['CATEGORY'], $cate);
+    $this->assertEquals($output['DESCRIPTION'], $desc);
+    $this->assertEquals($output['QTY'], $qty);
+    
+  }
+
+  public function testRemoveItem() {
+    $name = "Pacman Sprite";
+    $url = "https://lamp.ms.wits.ac.za/~s1965919/uploads/25.png";
+    $price = 20.00;
+    $cate = "Resource";
+    $desc = "Sprite Image for Pacman Game"
+    $qty = 10;
+
+    $helper = new helperFunctions;
+    $result = $helper->addItem(-1, $name, $price, $cate, $desc, $url, $qty);
+
+    $items = $helper->getAllItems();
+    $first = $items[0];
+
+    $id = $first['ID'];
+
+    $output = $helper->removeItem($id);
+
+    $this->assertEquals($output, 0);
+
+    $output = $helper->getItemInfo($id);
+
+    $this->assertEquals($output['ERROR'], true);
   }
 }
 
