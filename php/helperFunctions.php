@@ -212,12 +212,33 @@ class HelperFunctions {
 	 *	0 - Success
 	 */
 	function removeItem($itemID) {
-		$this->database->exec(
-			"DELETE FROM MARKET_NEW WHERE MARKET_ID='$itemID'");
-		if ($this->database->resultSet() !== 1) {
+		$item = getItemInfo($itemID);
+		if ($item['ERROR'] == true)
 			return 1;
+
+		$id = $response['ID'];
+		$name = $response['NAME'];
+		$url = $response['URL'];
+		$price = $response['PRICE'];
+		$cate = $response['CATEGORY'];
+		$desc = $response['DESCRIPTION'];
+		$qty = $response['QTY'];
+
+		if ($qty === 1) {
+			$this->database->exec(
+				"DELETE FROM MARKET_NEW WHERE MARKET_ID='$itemID'");
+			if ($this->database->resultSet() !== 0);
+				return 0;
+			else
+				return 1;
 		} else {
-			return 0;
+			$qty -= 1;
+			$this->database->exec(
+				"UPDATE table MARKET_NEW set QTY='$qty' where MARKET_ID='$itemID'");
+			if ($this->database->resultSet() !== 0)
+				return 0;
+			else
+				return 1;
 		}
 	}
 
@@ -227,7 +248,7 @@ class HelperFunctions {
 	 *	1 - Failed;
 	 *	0 - Success
 	 *
-	public function addItem($name, $price, $cate, $desc, $file) {
+	public function addItemWithFile($name, $price, $cate, $desc, $file) {
 		//getting file info from the request 
 		$fileinfo = pathinfo($_FILES['image']['name']);
 		//getting the file extension 
@@ -263,6 +284,91 @@ class HelperFunctions {
 		else 
 			return ++$row['MARKET_ID']; 
 	}*/
+
+	
+
+	/*
+	 * Function to add an item to MARKET_NEW table;
+	 * Returns : 
+	 *	1 - Failed;
+	 *	0 - Success
+	 */
+	function addItem($itemId, $name, $price, $cate, $desc, $url, $qty) {
+		if ($itemID === -1) { // If this is a new item
+			$this->database->exec(
+				"INSERT INTO MARKET_NEW (IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, QTY) VALUES ('$url', '$name', '$price', '$cate', '$desc', '$qty')");
+			if ($this->database->resultSet() !== 0)
+				return 0;
+			else
+				return 1;
+		} else {
+			$item = getItemInfo($itemID);
+			if ($item['ERROR'] == false) {
+				$qty = $item['QTY'];
+				$qty += 1;
+				$this->database->exec(
+					"UPDATE table MARKET_NEW set QTY='$qty' where MARKET_ID='$itemID'");
+				if ($this->database->resultSet() !== 0)
+					return 0;
+				else
+					return 1;
+			} else 
+				return 1;
+		}
+	}
+
+	/*
+	 * Function which add give item to student's cart
+	 * Returns : 
+	 *	0 - Success
+	 *	1 - Failed
+	 *	2 - Item doesn't not exist or can not be bought
+	 */
+	function addToCart($itemID, $studentNo) {
+		$item = getItemInfo($itemID);
+		if ($item['ERROR'] == true)
+			return 2;
+
+		$name = $response['NAME'];
+		$url = $response['URL'];
+		$price = $response['PRICE'];
+		$cate = $response['CATEGORY'];
+		$desc = $response['DESCRIPTION'];
+		$qty = $response['QTY'];
+
+		$this->database->exec(
+			"INSERT INTO CART VALUES('$studentNo', '$itemID', '$url', '$name', '$price', '$cate', '$desc')");
+		if ($this->database->resultSet() !== 0) {
+			if (removeItem($itemID) === 0)
+				return 0;
+			else
+				return 2;
+		} else
+			return 1;
+	}
+
+	function removeFromCart($itemID, $studentNo) {
+		$item = getItemInfoFromCart($itemID);
+		if ($item['ERROR'] == true)
+			return 2;
+
+		$name = $response['NAME'];
+		$url = $response['URL'];
+		$price = $response['PRICE'];
+		$cate = $response['CATEGORY'];
+		$desc = $response['DESCRIPTION'];
+
+		$this->database->exec(
+			"DELETE FROM CART WHERE MARKET_ID='$itemID' LIMIT 1");
+		if ($this->database->resultSet() === 1) {
+			$result = addItem($itemId, $name, $price, $cate, $desc, $url, 1);
+			if ($result === 0)
+				return 0;
+			else
+				return 1;
+		} else 
+			return 1;
+	}
 
 }
 
