@@ -70,6 +70,7 @@ class login{
         //return false; // account does not exist
     }
 }
+/*
     $username = $_POST["studentNumber"];
     $password = $_POST["password"];
     $user = new login($username,$password);
@@ -77,5 +78,5 @@ class login{
         header('location:../homepage.php');
     }else{
         header('location:../index.php');
-    }
+    }*/
 ?>
