@@ -1,6 +1,6 @@
 <?php
 
-class Database1 {
+class Database2 {
 
     private $host = '127.0.0.1';
     private $user = 's1965919';
@@ -57,7 +57,7 @@ class HelperFunctions {
 	private $database;
 
 	function __construct() {
-		$this->database = new Database1;
+		$this->database = new Database2;
 	}
 	
 	/*
