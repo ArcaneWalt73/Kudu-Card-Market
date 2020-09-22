@@ -206,7 +206,7 @@ class HelperFunctions {
 		if ($qty === 1) {
 			$this->database->exec(
 				"DELETE FROM MARKET_NEW WHERE MARKET_ID='$itemID'");
-			if ($this->database->resultSet() !== 0);
+			if ($this->database->resultSet() !== 0)
 				return 0;
 			else
 				return 1;
