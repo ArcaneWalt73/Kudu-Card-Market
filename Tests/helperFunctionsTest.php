@@ -21,7 +21,8 @@ class testHelper extends PHPUnit\Framework\TestCase {
     $qty = 10;
 
     $helper = new helperFunctions;
-    $result = $helper->addItem(-1, $name, $price, $cate, $desc, $url, $qty);
+    $itemID = -1;
+    $result = $helper->addItem($itemID, $name, $price, $cate, $desc, $url, $qty);
 
     $this->assertEquals($result, 0);    
 
@@ -60,7 +61,8 @@ class testHelper extends PHPUnit\Framework\TestCase {
     $qty = 10;
 
     $helper = new helperFunctions;
-    $result = $helper->addItem(-1, $name, $price, $cate, $desc, $url, $qty);
+    $itemID = -1;
+    $result = $helper->addItem($itemID, $name, $price, $cate, $desc, $url, $qty);
 
     $output = getItemInfo(-1); // Test non-existent item
     $this->assertEquals($output['ERROR'], true);
@@ -85,7 +87,8 @@ class testHelper extends PHPUnit\Framework\TestCase {
     $qty = 10;
 
     $helper = new helperFunctions;
-    $result = $helper->addItem(-1, $name, $price, $cate, $desc, $url, $qty);
+    $itemID = -1;
+    $result = $helper->addItem($itemID, $name, $price, $cate, $desc, $url, $qty);
 
     $items = $helper->getAllItems();
     $first = $items[0];

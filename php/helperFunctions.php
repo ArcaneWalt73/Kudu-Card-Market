@@ -311,7 +311,7 @@ class HelperFunctions {
 	 *	1 - Failed;
 	 *	0 - Success
 	 */
-	function addItem($itemId, $name, $price, $cate, $desc, $url, $qty) {
+	function addItem($itemID, $name, $price, $cate, $desc, $url, $qty) {
 		if ($itemID === -1) { // If this is a new item
 			$this->database->exec(
 				"INSERT INTO MARKET_NEW (IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, QTY) VALUES ('$url', '$name', '$price', '$cate', '$desc', '$qty')");
