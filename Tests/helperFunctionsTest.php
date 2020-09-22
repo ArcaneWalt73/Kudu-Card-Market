@@ -64,10 +64,10 @@ class testHelper extends PHPUnit\Framework\TestCase {
     $itemID = -1;
     $result = $helper->addItem($itemID, $name, $price, $cate, $desc, $url, $qty);
 
-    $output = getItemInfo(-1); // Test non-existent item
+    $output = $helper->getItemInfo(-1); // Test non-existent item
     $this->assertEquals($output['ERROR'], true);
 
-    $output = getItemInfo(0);
+    $output = $helper->getItemInfo(0);
     $this->assertEquals($output['ERROR'], false);
     $this->assertEquals($output['NAME'], $name);
     $this->assertEquals($output['URL'], $url);

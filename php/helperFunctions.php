@@ -136,7 +136,14 @@ class HelperFunctions {
 
 			$items = array();
 			while ($dataResult = $result->fetch(PDO::FETCH_ASSOC)) {
-				$data = $rating->fetch(PDO::FETCH_ASSOC);
+				if (isset($rating))
+					$data = $rating->fetch(PDO::FETCH_ASSOC);
+					$response['RATING'] = $data['RATING'];
+					$response['REVIEWS'] = $data['REVIEWS'];
+				else {
+					$response['RATING'] = 0;
+					$response['REVIEWS'] = "";
+				}
 
 				$response['ID'] = $dataResult['MARKET_ID'];
 				$response['NAME'] = $dataResult['NAME'];
@@ -145,8 +152,6 @@ class HelperFunctions {
 				$response['CATEGORY'] = $dataResult['CATEGORY'];
 				$response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
 				$response['QTY'] = $dataResult['QTY'];
-				$response['RATING'] = $data['RATING'];
-				$response['REVIEWS'] = $data['REVIEWS'];
 
 				$items[] = $response;
 			}
