@@ -20,8 +20,8 @@ function getItemDetails(PDO $pdo, $market_id)
 //!!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE IT  FOR WEBSITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	session_start();
-	$username = "s1965919";
-	$password = "ICTPass1670";
+	$username = "root";
+	$password = "";
 	$database = "d1965919";
 	$link = mysqli_connect("127.0.0.1", $username, $password, $database);
 	$output = array(); //stores all the items from different catogories
