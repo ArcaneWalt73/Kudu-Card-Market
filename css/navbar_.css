@@ -2,7 +2,7 @@
 .navbar {
   width: 100%;
   background-color: #555;
-  overflow: auto;
+  overflow: hidden;
 }
 
 /* Navbar links */
@@ -201,3 +201,4 @@ span.psw {
   width: 200px;
   height: 150px;
 }
+
