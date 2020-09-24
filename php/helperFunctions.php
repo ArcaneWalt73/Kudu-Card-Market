@@ -57,7 +57,7 @@ class HelperFunctions {
         private $database;
 
         public function __construct() {
-                $this->database = new Database2;
+                $this->database = new Database1;
         }
 
         /*
@@ -81,15 +81,15 @@ class HelperFunctions {
                                 $response['ERROR'] = true;
                                 return $response;
                         }
-                        $response['ID'] = isset($dataResult['MARKET_ID']);
-                        $response['NAME'] = isset($dataResult['NAME']);
-                        $response['URL'] = isset($dataResult['IMAGE_URL']);
-                        $response['PRICE'] = isset($dataResult['PRICE']);
-                        $response['CATEGORY'] = isset($dataResult['CATEGORY']);
-                        $response['DESCRIPTION'] = isset($dataResult['DESCRIPTION']);
-                        $response['QTY'] = isset($dataResult['QTY']);
-                        $response['RATING'] = isset($data['RATING']);
-                        $response['REVIEWS'] = isset($data['REVIEWS']);
+                        $response['ID'] = $dataResult['MARKET_ID'];
+                        $response['NAME'] = $dataResult['NAME'];
+                        $response['URL'] = $dataResult['IMAGE_URL'];
+                        $response['PRICE'] = $dataResult['PRICE'];
+                        $response['CATEGORY'] = $dataResult['CATEGORY'];
+                        $response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
+						$response['QTY'] = $dataResult['QTY'];
+                        //$response['RATING'] = $data['RATING'];
+                        //$response['REVIEWS'] = $data['REVIEWS'];
                         $response['ERROR'] = false;
                         return $response;
                 } else
@@ -100,7 +100,7 @@ class HelperFunctions {
         /*
          * Function to retrieve an item's data from the cart
          */
-        function getItemInfoFromCart($id){
+        public function getItemInfoFromCart($id){
                 $response = array();
                 $this->database->query( // Retrieve item info from database
                         'SELECT * FROM CART WHERE MARKET_ID='.$id.' LIMIT 1');
@@ -130,7 +130,7 @@ class HelperFunctions {
         /*
          * Function to retrieve all items from the marketplace;
          */
-        function getAllItems() {
+        public function getAllItems() {
                 $this->database->query(
                         "SELECT * FROM MARKET_NEW");
                 $result = $this->database->resultSet();
@@ -143,15 +143,15 @@ class HelperFunctions {
                         while ($dataResult = $result->fetch(PDO::FETCH_ASSOC)) {
                                 $data = $rating->fetch(PDO::FETCH_ASSOC);
 
-                                $response['ID'] = isset($dataResult['MARKET_ID']);
-                                $response['NAME'] = isset($dataResult['NAME']);
-                                $response['URL'] = isset($dataResult['IMAGE_URL']);
-                                $response['PRICE'] = isset($dataResult['PRICE']);
-                                $response['CATEGORY'] = isset($dataResult['CATEGORY']);
-                                $response['DESCRIPTION'] = isset($dataResult['DESCRIPTION']);
-                                $response['QTY'] = isset($dataResult['QTY']);
-                                $response['RATING'] = isset($data['RATING']);
-                                $response['REVIEWS'] = isset($data['REVIEWS']);
+                                $response['ID'] = $dataResult['MARKET_ID'];
+                                $response['NAME'] = $dataResult['NAME'];
+                                $response['URL'] = $dataResult['IMAGE_URL'];
+                                $response['PRICE'] = $dataResult['PRICE'];
+                                $response['CATEGORY'] = $dataResult['CATEGORY'];
+                                $response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
+                                $response['QTY'] = $dataResult['QTY'];
+                                //$response['RATING'] = $data['RATING'];
+                                //$response['REVIEWS'] = $data['REVIEWS'];
 
                                 $items[] = $response;
                         }
@@ -171,7 +171,7 @@ class HelperFunctions {
          *              3 - Insuffient Credit
          *              4 - Item does not exit
          */
-        function buyItem($itemID, $studentNo) {
+        public function buyItem($itemID, $studentNo) {
                 $this->database->query( // Retrieve student credit points
                         'SELECT KUDU_BUCKS FROM `STUDENTS` WHERE STUDENT_NO='.$studentNo);
                 $result = $this->database->resultSet();
@@ -234,7 +234,7 @@ class HelperFunctions {
          *      1 - Item is not in table;
          *      0 - Success
          */
-        function removeItem($itemID) {
+        public function removeItem($itemID) {
                 $item = $this->getItemInfo($itemID);
                 if ($item['ERROR'] == true)
                         return 1;
@@ -320,7 +320,7 @@ class HelperFunctions {
          *      1 - Failed;
          *      0 - Success
          */
-        function addItem($itemId, $name, $price, $cate, $desc, $url, $qty) {
+        public function addItem($itemId, $name, $price, $cate, $desc, $url, $qty) {
                 if ($itemId === -1) { // If this is a new item
                         $this->database->exec(
                                 "INSERT INTO MARKET_NEW (IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, QTY) VALUES ('$url', '$name', '$price', '$cate', '$desc', '$qty')");
@@ -351,7 +351,7 @@ class HelperFunctions {
          *      1 - Failed
          *      2 - Item doesn't not exist or can not be bought
          */
-        function addToCart($itemId, $studentNo) {
+        public function addToCart($itemId, $studentNo) {
                 #echo "ItemId : ".$itemID;
                 $item = $this->getItemInfo($itemId);
                 if ($item['ERROR'] == true)
@@ -382,7 +382,7 @@ class HelperFunctions {
          *      1 - Failed
          *      2 - Item doesn't not exist or can not be bought
          */
-        function removeFromCart($itemId, $studentNo) {
+        public function removeFromCart($itemId, $studentNo) {
                 $item = $this->getItemInfoFromCart($itemId);
                 if ($item['ERROR'] == true)
                         return 2;
@@ -406,4 +406,5 @@ class HelperFunctions {
         }
 
 }
+
 ?>
