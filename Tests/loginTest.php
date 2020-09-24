@@ -6,7 +6,7 @@ include 'php/login.php';
 
     public function testGetAllTasks() {
 
-      $table = array(array('PASSWORD' => password_hash('123',PASSWORD_DEFAULT)));
+      $table = array(array('PASSWORD' => '$2y$10$cyH0zq2FW9PHvDftf0PhEuFjJ./I9RC/j5iyrA25Nedk6GBf5v6AO'));
 
       $dbase = $this->getMockBuilder('Database')->getMock();
 
