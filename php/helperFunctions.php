@@ -57,7 +57,7 @@ class HelperFunctions {
         private $database;
 
         public function __construct() {
-                $this->database = new Database1;
+                $this->database = new Database2;
         }
 
         /*
