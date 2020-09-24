@@ -13,7 +13,7 @@ include 'php/login.php';
       $dbase->method('resultSet')->will($this->returnValue($table));
       //$expectedResult = ['PASSWORD' => '123'];
     
-      $task = new login('123','123');
+      $task = new login('1234','123');
       $actualResult =  $task->getAllTasks();
       $this->assertEquals($dbase->resultSet()[0], $actualResult[0]);
     }
