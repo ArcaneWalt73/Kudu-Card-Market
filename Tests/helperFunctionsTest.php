@@ -76,6 +76,7 @@ require_once 'php/helperFunctions.php';
         public function testBuyItem(){
             $test = new HelperFunctions();
             $this->assertEquals(0,$test->buyItem(20,1234));
+            $this->assertEquals(1,$test->buyItem(13,1234));
         }
         
 }
