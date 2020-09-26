@@ -23,7 +23,7 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
     
     
     //insert values into PURCHASE
-    $this->pdo->query("INSERT INTO PURCHASES VALUES ('7777777',18,2020-06-08);");
+    $this->pdo->query("INSERT INTO PURCHASES VALUES ('7777777', 18 ,'2020-06-08');");
     
     global $pdo;
     $pdo = $this->pdo;
