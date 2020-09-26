@@ -8,15 +8,6 @@ function getPurchases(PDO $pdo, $studentNo)
 	return $stmt->fetchColumn();
 }
 
-//gets the details of the items given Market_Id
-function getItemDetails(PDO $pdo, $market_id)
-{
-	$sql = "select * from MARKET_NEW where MARKET_ID='$market_id';";
-	$stmt = $pdo->query($sql);
-
-	return $stmt->fetchColumn(2);
-}
-
 /*!!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE IT  FOR WEBSITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	session_start();
