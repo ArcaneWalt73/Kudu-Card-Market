@@ -178,53 +178,47 @@ class HelperFunctions {
 
                 if ($result !== -1) {
                         $row = $result->fetch(PDO::FETCH_ASSOC);
-                $this->database->query( // Retrieve item info
+                        $this->database->query( // Retrieve item info
                         'SELECT * FROM `MARKET_NEW` WHERE MARKET_ID='.$itemID);
-                $itemResult = $this->database->resultSet();
-                if ($itemResult !== -1) {
-                        $col = $itemResult->fetch(PDO::FETCH_ASSOC);
-                        $kudu = $row['KUDU_BUCKS'];
+                        $itemResult = $this->database->resultSet();
+                        if ($itemResult !== -1) {
+                                $col = $itemResult->fetch(PDO::FETCH_ASSOC);
+                                $kudu = $row['KUDU_BUCKS'];
 
-                        $amount = $col['PRICE'];
-                        $qty = $col['QTY'];
+                                $amount = $col['PRICE'];
+                                $qty = $col['QTY'];
 
-                        $name = $col['NAME'];
-                        $url = $col['IMAGE_URL'];
-                        $price = $col['PRICE'];
-                        $cate = $col['CATEGORY'];
-                        $desc = $col['DESCRIPTION'];
+                                $name = $col['NAME'];
+                                $url = $col['IMAGE_URL'];
+                                $price = $col['PRICE'];
+                                $cate = $col['CATEGORY'];
+                                $desc = $col['DESCRIPTION'];
 
-                        if ($kudu >= $amount && $qty >= 1) {
-                                $current_Amount = $kudu - $amount; // the amount after payments
-                                $qty = $qty - 1;
-
-                                $this->database->exec(
-                                        'UPDATE STUDENTS SET KUDU_BUCKS='.$current_Amount.' WHERE STUDENT_NO='.$studentNo);
-                                if($this->database->resultSet() !== 0){
-                                        $this->database->exec(
-                                                "INSERT INTO PURCHASES(
-                                                        STUDENT_NO, MARKET_ID, IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, PURCHASE_DATE)
-                                                VALUES('$studentNo', '$itemID', '$url', '$name', '$price', '$cate', '$desc', CURRENT_DATE);");
-                                        $purchaseResult = $this->database->resultSet();
+                                if ($kudu >= $amount && $qty >= 1) {
+                                        $current_Amount = $kudu - $amount; // the amount after payments
+                                        $qty = $qty - 1;
 
                                         $this->database->exec(
-                                                "UPDATE MARKET_NEW SET QTY='$qty' WHERE MARKET_ID='$itemID'");
-                                        $qtyResult = $this->database->resultSet();
-                                        if ($qty === 0)
-                                                $this->removeItem($itemID);
-                                        if($purchaseResult !== 0)
-                                                return 0;
-                                        else
-                                                return 1;
+                                                'UPDATE STUDENTS SET KUDU_BUCKS='.$current_Amount.' WHERE STUDENT_NO='.$studentNo);
+                                        if($this->database->resultSet() !== 0){
+                                                $this->database->exec(
+                                                        "INSERT INTO PURCHASES(
+                                                                STUDENT_NO, MARKET_ID, IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, PURCHASE_DATE)
+                                                        VALUES('$studentNo', '$itemID', '$url', '$name', '$price', '$cate', '$desc', CURRENT_DATE);");
+                                                $purchaseResult = $this->database->resultSet();
+
+                                                $this->database->exec(
+                                                        "UPDATE MARKET_NEW SET QTY='$qty' WHERE MARKET_ID='$itemID'");
+                                                $qtyResult = $this->database->resultSet();
+                                                if ($qty == 0)
+                                                        $this->removeItem($itemID);
+                                                if($purchaseResult !== 0)
+                                                        return 0;
+                                        }
                                 }
                                 else
-                                        return 2;
+                                        return 1;
                         }
-                        else
-                                return 3;
-                }
-                else
-                        return 4;
                 }
         }
 
@@ -238,34 +232,25 @@ class HelperFunctions {
                 $item = $this->getItemInfo($itemID);
                 if ($item['ERROR'] == true)
                         return 1;
-
-                $id = $item['ID'];
-                $name = $item['NAME'];
-                $url = $item['URL'];
-                $price = $item['PRICE'];
-                $cate = $item['CATEGORY'];
-                $desc = $item['DESCRIPTION'];
                 $qty = $item['QTY'];
 
 #               echo "  Sub-CheckPoint : 1</br>";
-                if ($qty === 1) {
+                if ($qty <= 1) {
 #                       echo "  Sub-CheckPoint : 1.1 - $qty</br>";
                         $this->database->exec(
                                 "DELETE FROM MARKET_NEW WHERE MARKET_ID='$itemID'");
-                        if ($this->database->resultSet() !== 0)
+                        if ($this->database->resultSet() !== 0){
                                 return 0;
-                        else
-                                return 1;
+                        }
                 } else {
 #                       echo "  Sub-CheckPoint : 1.2 - $qty</br>";
                         $qty -= 1;
                         $this->database->exec(
                                 "UPDATE MARKET_NEW set QTY='$qty' where MARKET_ID='$itemID'");
 #                       echo "  Sub-CheckPoint : 1.3 - $qty</br>";
-                        if ($this->database->resultSet() !== 0)
+                        if ($this->database->resultSet() !== 0){
                                 return 0;
-                        else
-                                return 1;
+                        }
                 }
         }
 
@@ -321,26 +306,20 @@ class HelperFunctions {
          *      0 - Success
          */
         public function addItem($itemId, $name, $price, $cate, $desc, $url, $qty) {
-                if ($itemId === -1) { // If this is a new item
+                $item = $this->getItemInfo($itemId);
+                if ($item['ERROR'] == false) {
+                        $qty2 = $item['QTY'];
+                        $qty += $qty2;
+                        $this->database->exec(
+                                "UPDATE MARKET_NEW set QTY='$qty' where MARKET_ID='$itemId'");
+                        if ($this->database->resultSet() !== 0)
+                                return 0;
+                }else{
+                        // If this is a new item
                         $this->database->exec(
                                 "INSERT INTO MARKET_NEW (IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, QTY) VALUES ('$url', '$name', '$price', '$cate', '$desc', '$qty')");
                         if ($this->database->resultSet() !== 0)
                                 return 0;
-                        else
-                                return 1;
-                } else {
-                        $item = $this->getItemInfo($itemId);
-                        if ($item['ERROR'] == false) {
-                                $qty2 = $item['QTY'];
-                                $qty += $qty2;
-                                $this->database->exec(
-                                        "UPDATE MARKET_NEW set QTY='$qty' where MARKET_ID='$itemId'");
-                                if ($this->database->resultSet() !== 0)
-                                        return 0;
-                                else
-                                        return 1;
-                        } else
-                                return 1;
                 }
         }
 
@@ -369,10 +348,7 @@ class HelperFunctions {
                 if ($this->database->resultSet() !== 0) {
                         if ($this->removeItem($itemId) === 0)
                                 return 0;
-                        else
-                                return 2;
-                } else
-                        return 1;
+                } 
         }
 
         /*
@@ -386,7 +362,6 @@ class HelperFunctions {
                 $item = $this->getItemInfoFromCart($itemId);
                 if ($item['ERROR'] == true)
                         return 2;
-                echo json_encode($item);
                 $name = $item['NAME'];
                 $url = $item['URL'];
                 $price = $item['PRICE'];
@@ -399,12 +374,8 @@ class HelperFunctions {
                         $result = $this->addItem($itemId, $name, $price, $cate, $desc, $url, 1);
                         if ($result === 0)
                                 return 0;
-                        else
-                                return 1;
-                } else
-                        return 1;
+                }
         }
 
 }
-
 ?>
