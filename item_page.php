@@ -10,18 +10,31 @@ $response = $helper->getItemInfo($id);
 
 $resp = getUserSession();
 
+if (isset($resp['name'])){$phpFile="./homepage.php";}else{$phpFile="./index.php";}
 
-/*if ($response['ERROR'] === true)
+function showSnackbar($message) {
+	echo "
+	<div id='snackbar'>
+		$message;
+		<script type='text/javascript'>
+			showSnackbar();
+		</script>
+	</div>
+	";
+}
+
+/*if ($e['ERROR'] === true)
 	if (isset($name))
 		header("location: ../homepage.php");
 	else
 		header("location: ../index.php");
 */
-$message = "please login first";
+/*$message = "please login first";
 if(isset($_POST['buy_btn'])) { 
 	if ($resp['code'] === 0) {
+		showSnackbar("Hello ".$resp['name']);
 		#echo $resp['name'];
-		if ($helper->buyItem($id, $resp['name']) === 0)
+		/*if ($helper->buyItem($id, $resp['name']) === 0)
 			$message = "Transaction Successfull";
 		else
 			$message = "Transaction Failed";
@@ -29,16 +42,17 @@ if(isset($_POST['buy_btn'])) {
 			<script type='text/javascript'>
 				alert('$message');
 				window.location.replace('./homepage.php');
-			</script>" ;
+			</script>" ;/
 	} else {
 		#echo "set user";
-		echo "
+		showSnackbar($message);
+		/echo "
 			<script type='text/javascript'>
 				alert('$message');
 				window.location.replace('./index.php');
-			</script>" ;
+			</script>" ;*
 	}
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -64,18 +78,19 @@ if(isset($_POST['buy_btn'])) {
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/navbar_.css">
 	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/dropbox.css">
-	
+	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/snackbar.css">
 
 	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!--script src="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/js/snackbar.js"></script-->
 
 	
 </head>
 <body>
 
 	<div class="navbar">
-		<a href="./homepage.php" class="tablinks active"><i class="fa fa-fw fa-home"></i>Home</a>
+		<a href=<?php echo $phpFile; ?> class="tablinks active"><i class="fa fa-fw fa-home"></i>Home</a>
 
            
 		<div id="cart" style="float:left; color:white">
@@ -84,7 +99,7 @@ if(isset($_POST['buy_btn'])) {
 	
 	
 		<div class="dropdown">
-	                 <button class="dropbtn" style="width:auto;"><b id="username"> <?php echo $resp['name'] ?> 
+	                 <button class="dropbtn" style="width:auto;"><b id="username"> <?php if (isset($resp['name'])){ echo $resp['name'];} ?> 
                		 </b>
                		 <i class="fa fa-caret-down"></i>
                		 </button>
@@ -145,14 +160,17 @@ if(isset($_POST['buy_btn'])) {
 		</div>
 		<div id="item_info" class='container'>
 			<h6>QTY:</h6>
-			<p><?php echo $response['QTY']?></p>
+			<p id="qty"><?php echo $response['QTY']?></p>
 		</div>
-		<div id="item_info" class="container">
+		<!--div id="item_info" class="container">
 			<form method="post"> 
         			<input type="submit" name="buy_btn" value="BUY"/>
 			</form>
-		</div>
+		</div-->
+		<button onclick="showSnackbar()">ADD TO CART</button>
 	</div>
+
+	<div id="snackbar"><p id="alert"></p></div>
 
 	<script>
 		/*var options = window.location.search.slice(1)
@@ -190,6 +208,75 @@ if(isset($_POST['buy_btn'])) {
                 }
             }
           </script>
+
+	<script>
+	/*
+	 * How to use:
+	 * Create a div element with id="snackbar" and message between tags
+	 * call showSnackbar() when you want to show it
+	 */
+
+	function showSnackbar () {
+/*$message = "please login first";
+if(isset($_POST['buy_btn'])) { 
+	if ($resp['code'] === 0) {
+		showSnackbar("Hello ".$resp['name']);
+		#echo $resp['name'];
+		/*if ($helper->buyItem($id, $resp['name']) === 0)
+			$message = "Transaction Successfull";
+		else
+			$message = "Transaction Failed";
+		echo "
+			<script type='text/javascript'>
+				alert('$message');
+				window.location.replace('./homepage.php');
+			</script" ;/
+	} else {
+		#echo "set user";
+		showSnackbar($message);
+		/echo "
+			<script type='text/javascript'>
+				alert('$message');
+				window.location.replace('./index.php');
+			</scrip>" ;*
+	}
+}*/
+		var output = "<?php
+				if ($resp['code'] === 0) {
+					if ($helper->addToCart($id, $resp['name']) === 0) {
+						$response['QTY'] -= 1;
+						echo "0";
+					}
+					else
+						echo "1";
+				} else
+					echo "2";
+				?>";
+		var message = "Please Login First";
+		console.log(output);
+		if (output == "0")
+			message = "Successfully Added To Cart";
+		else if (output == "1")
+			message = "Unable To Add To Cart";
+
+		var x = document.getElementById("snackbar");
+		var a = document.getElementById("alert");
+		var q = document.getElementById("qty");		
+
+		a.innerText = message;
+		x.className = "show";
+		q.innerText = "<?php
+				echo $response['QTY'];
+				?>";
+		console.log(q.innerText);
+
+		setTimeout(
+			function (){
+				x.className = x.className.replace("show", "");
+			}, 3000
+		);
+	}
+	</script>
 
 </body>
 </html>
