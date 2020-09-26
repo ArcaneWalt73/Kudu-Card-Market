@@ -51,5 +51,31 @@ require_once 'php/helperFunctions.php';
             $actualHelperFunctions = new HelperFunctions();
             $this->assertNotNull($actualHelperFunctions->getAllItems());
         }
+        public function testAddToCart(){
+            $actualHelperFunctions = new HelperFunctions();
+            $this->assertEquals(2,$actualHelperFunctions->addToCart('-1','1234'));
+            $this->assertEquals(0,$actualHelperFunctions->addToCart('16','1234'));
+        }
+        public function testRemoveFromCart(){
+            $actualHelperFunctions = new HelperFunctions();
+            $this->assertEquals(2,$actualHelperFunctions->removeFromCart('-1','1234'));
+            $actualHelperFunctions->addToCart('22','1234');
+            $this->assertEquals(0,$actualHelperFunctions->removeFromCart('22','1234'));
+        }
+        public function testRemoveItem(){
+            $test = new HelperFunctions();
+            $this->assertEquals(0,$test->removeItem(16));
+            $this->assertEquals(1,$test->removeItem(-1));
+        }
+
+        public function testAddItem(){
+            $test = new HelperFunctions();
+            $this->assertEquals(0,$test->addItem('-18','danone',20,'FOOD','its nice','http',1));
+            $this->assertEquals(0,$test->addItem('16','danone',20,'FOOD','its nice','http',1));
+        }
+        public function testBuyItem(){
+            $test = new HelperFunctions();
+            $this->assertEquals(0,$test->buyItem(20,1234));
+        }
         
 }
