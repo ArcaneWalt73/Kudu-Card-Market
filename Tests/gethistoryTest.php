@@ -16,9 +16,9 @@ class gethistoryTest extends PHPUnit\Framework\TestCase
     //create the PURCHASES table
     $this->pdo->query(
       "CREATE TABLE IF NOT EXISTS PURCHASES (
-       STUDENT_NO varchar(20) ,
-       MARKET_ID int(11) unsigned ,
-       PURCHASE_DATE date
+       STUDENT_NO varchar(20) DEFAULT '1234',
+       MARKET_ID int(11) unsigned DEFAULT '',
+       PURCHASE_DATE date DEFAULT ''
        );"
      );
     
