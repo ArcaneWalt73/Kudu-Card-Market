@@ -5,7 +5,7 @@ function getPurchases(PDO $pdo, $studentNo)
 	$sql = "select * from PURCHASES where STUDENT_NO='$studentNo';";
 	$stmt = $pdo->query($sql);
 
-	return $stmt->fetchColumn();
+	return $stmt->fetchColumn(1);
 }
 
 /*!!!!!!!!!!!!!!!!!!!UNCOMMENT THESE WHEN YOU NEED TO USE IT  FOR WEBSITE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
