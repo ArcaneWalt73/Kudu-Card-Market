@@ -165,9 +165,11 @@
                       var filteredList = data.filter(function(i){
                           var dataString = '';
                           for(var j in i){
-                            if(i.hasOwnProperty(j) && i[j]!==''){
-                              dataString += i[j].toString().toLowerCase().trim()+' ';
-                            }
+				if(j == 'NAME'){
+				    if(i.hasOwnProperty(j) && i[j]!==''){
+				      dataString += i[j].toString().toLowerCase().trim()+' ';
+				    }
+			  	}
                           }
                           return dataString.match(keyRegex);
 
