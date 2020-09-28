@@ -3,7 +3,6 @@
 class getItem{
 	private $database;
 	public function __construct(){
-		require('helperFunctions.php');
 		$this->database = new Database2();
 	}
 	public function getMarketItems() {
