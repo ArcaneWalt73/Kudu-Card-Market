@@ -1,8 +1,0 @@
-var studNo;
-function setUsername(username){
-	studNo = username;
-}
-
-function getUsername(){
-	return studNo;
-}
