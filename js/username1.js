@@ -1,1 +1,0 @@
-var studNo=123;
