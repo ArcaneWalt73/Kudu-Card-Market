@@ -1,9 +1,8 @@
 <?php
-session_start();
 class Database {//the user details need not to be the same ones from git, as those are used for testing
     private $host = '127.0.0.1';
-    private $user = 's1965919';
-    private $pass = 'ICTPass1670';
+    private $user = 'root';
+    private $pass = '';
     private $dbname = 'd1965919';
 
     private $db;
