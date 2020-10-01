@@ -2,8 +2,8 @@
 class Database1 {
 
     private $host = '127.0.0.1';
-    private $user = 'root';
-    private $pass = '';
+    private $user = 's1965919';
+    private $pass = 'ICTPass1670';
     private $dbname = 'd1965919';
 
     private $db;
@@ -69,7 +69,7 @@ class register{
         }
     }
 }
-/*
+
 $user = new register($_POST["studentNumber"],$_POST["fname"],$_POST["lname"],$_POST["password"],$_POST["email"],$_POST["contact"]);
 if($user->doRegister()){
 	echo '<script>
@@ -81,5 +81,5 @@ if($user->doRegister()){
 	alert("Could not create an account");
 	window.location.href = "../index.php"
 	</script>';
-}*/
+}
 ?>

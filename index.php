@@ -140,9 +140,28 @@
                       price.innerText = "R" + myData[i]["PRICE"];
                       priceDiv.appendChild(price);
 
+                      var rate = document.createElement("div");
+                      rate.setAttribute("class","container");
+                      var checked = myData[i]["RATING"];
+			console.log(myData);
+                      for(var j=0; j<checked; j++){
+                        var local = document.createElement("span");
+                        local.setAttribute("class","fa fa-star");
+                        local.setAttribute("style","color:orange");
+                        rate.appendChild(local);
+                      }
+                      var unChecked = 5-checked;
+                      for(var j=0; j<unChecked; j++){
+                        var local = document.createElement("span");
+                        local.setAttribute("class","fa fa-star");
+                        local.setAttribute("style","color:black");
+                        rate.appendChild(local);
+                      }
+
                       div3.appendChild(para);
                       div2.appendChild(img);
                       div2.appendChild(div3);
+                      div2.appendChild(rate);
                       div2.appendChild(priceDiv);
                       div1.appendChild(div2);
                       home.appendChild(div1);
@@ -165,11 +184,11 @@
                       var filteredList = data.filter(function(i){
                           var dataString = '';
                           for(var j in i){
-				if(j == 'NAME'){
-				    if(i.hasOwnProperty(j) && i[j]!==''){
-				      dataString += i[j].toString().toLowerCase().trim()+' ';
-				    }
-			  	}
+			    if(j=='NAME'){
+                            	if(i.hasOwnProperty(j) && i[j]!==''){
+                       		   dataString += i[j].toString().toLowerCase().trim()+' ';
+                            	}
+			    }
                           }
                           return dataString.match(keyRegex);
 

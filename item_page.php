@@ -84,7 +84,7 @@ if(isset($_POST['buy_btn'])) {
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!--script src="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/js/snackbar.js"></script-->
-
+	<script defer src="./js/cartHandler.js"></script>
 	
 </head>
 <body>
@@ -93,10 +93,15 @@ if(isset($_POST['buy_btn'])) {
 		<a href=<?php echo $phpFile; ?> class="tablinks active"><i class="fa fa-fw fa-home"></i>Home</a>
 
            
-		<div id="cart" style="float:left; color:white">
-			<a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
-	        </div>
-	
+		<div class="dropdown" id="cart" style="float:left" text-align="center">
+			<button id="cart_count" class="dropbtn" style="width:auto" onclick="openCartPage()">
+				<i class="fa fa-shopping-cart"></i>
+			</button>
+			<div class="dropdown-content" style="background-color:#009900" onclick="checkoutOnclick()">
+				<button>checkout</button>
+			</div>		
+
+	     	</div>	
 	
 		<div class="dropdown">
 	                 <button class="dropbtn" style="width:auto;"><b id="username"> <?php if (isset($resp['name'])){ echo $resp['name'];} ?> 
@@ -277,6 +282,28 @@ if(isset($_POST['buy_btn'])) {
 		);
 	}
 	</script>
+
+
+	<!-- checkout completion modal -->
+	  <div id="completion_modal" class="modal">
+	  	<div id= "confirm_btns_div" class="modal-content animate" style="background-color:#1e376c">
+			<p> All done! Thank you for your money.</p> 
+	  	</div>
+	  </div>
+
+	<!-- insufficient funds modal -->
+	  <div id="user_is_broke_modal" class="modal">
+	  	<div id= "confirm_btns_div" class="modal-content animate" style="background-color:#1e376c">
+			<p> Oops! You have insufficient funds</p> 
+	  	</div>
+	  </div>
+
+	  <!-- add to cart first modal -->
+	  <div id="empty_cart_modal" class="modal">
+	  	<div id= "confirm_btns_div" class="modal-content animate" style="background-color:#1e376c">
+			<p> :) You might want to add something to the cart first </p> 
+	  	</div>
+	  </div>
 
 </body>
 </html>

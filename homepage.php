@@ -8,8 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/dropbox.css">
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+	<!--<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+	<script src="./jquery/jquery.min.js"></script>
+	<script defer src="./js/cartHandler.js"></script>
+	
         <!-- Awesome Font CDN -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     
@@ -19,11 +21,19 @@
         <div class="navbar">
             <a onclick="clearSearch()" class="tablinks active"><i class="fa fa-fw fa-home"></i> Home</a>
 
-            <div id="cart" style="float:left">
-                <a>Cart<span class="price" style="color:white"><i class="fa fa-shopping-cart"></i> <b id="cartNumber">0</b></span></a>
-            </div>
+            <div class="dropdown" id="cart" style="float:left" text-align="center">
+		<button id="cart_count" class="dropbtn" style="width:auto" onclick="openCartPage()">
+			<i class="fa fa-shopping-cart"></i>
+		</button>
+		<div class="dropdown-content" style="background-color:#009900" onclick="checkoutOnclick()">
+			<button>checkout</button>
+		</div>		
+
+	     </div>
 	   
-	   <div class="dropdown">
+
+
+	   <div  class="dropdown">
 		 <button class="dropbtn" style="width:auto;"><b id="username"><script>
                         var username = "<?php
                                 include('php/getUser.php');
@@ -55,7 +65,7 @@
 
     		</div>
   	    </div>
-
+		
 
             <img src="images/defaultIcon.jpg" style="dispay: inline-block;" width="44px" height="44px">
 
@@ -125,9 +135,27 @@
                       price.innerText = "R" + myData[i]["PRICE"];
                       priceDiv.appendChild(price);
 
+                      var rate = document.createElement("div");
+                      rate.setAttribute("class","container");
+                      var checked = myData[i]["RATING"];
+                      for(var j=0; j<checked; j++){
+                        var local = document.createElement("span");
+                        local.setAttribute("class","fa fa-star");
+                        local.setAttribute("style","color:orange");
+                        rate.appendChild(local);
+                      }
+                      var unChecked = 5-checked;
+                      for(var j=0; j<unChecked; j++){
+                        var local = document.createElement("span");
+                        local.setAttribute("class","fa fa-star");
+                        local.setAttribute("style","color:black");
+                        rate.appendChild(local);
+                      }
+
                       div3.appendChild(para);
                       div2.appendChild(img);
                       div2.appendChild(div3);
+                      div2.appendChild(rate);
                       div2.appendChild(priceDiv);
                       div1.appendChild(div2);
                       home.appendChild(div1);
@@ -151,10 +179,10 @@
                           var dataString = '';
                           for(var j in i){
 				if(j == 'NAME'){
-				    if(i.hasOwnProperty(j) && i[j]!==''){
-				      dataString += i[j].toString().toLowerCase().trim()+' ';
-				    }
-			  	}
+                            	    if(i.hasOwnProperty(j) && i[j]!==''){
+                              		dataString += i[j].toString().toLowerCase().trim()+' ';
+                            	    }
+				}
                           }
                           return dataString.match(keyRegex);
 
@@ -187,5 +215,40 @@
               }
               /*the end of search*/
           </script>
+
+
+	  
+	  <!-- checkout confirmation modal -->
+	  <div id="confirm_modal" class="modal">
+	  	<div id= "confirm_btns_div" class="modal-content animate" style="background-color:#1e376c">
+			<p> Is this really you decision?</p>
+		 	<div id="confirm_btns_div" class="container" style="background-color:#1e376c">
+				<button id="no_btn" style="border-radius:15px 15px 15px 15px;" type="button" class="cancelbtn"  onclick="document.getElementById('confirm_modal').style.display='none'"> No </button>
+				<button id="yes_btn" style="border-radius:15px 15px 15px 15px;" type="button" class="confirmbtn"> yes </button>
+			</div>
+	  	</div>
+	  </div>
+
+	<!-- checkout completion modal -->
+	  <div id="completion_modal" class="modal">
+	  	<div id= "confirm_btns_div" class="modal-content animate" style="background-color:#1e376c">
+			<p> All done! Thank you for your money.</p> 
+	  	</div>
+	  </div>
+
+	<!-- insufficient funds modal -->
+	  <div id="user_is_broke_modal" class="modal">
+	  	<div id= "confirm_btns_div" class="modal-content animate" style="background-color:#1e376c">
+			<p> Oops! You have insufficient funds</p> 
+	  	</div>
+	  </div>
+
+	  <!-- add to cart first modal -->
+	  <div id="empty_cart_modal" class="modal">
+	  	<div id= "confirm_btns_div" class="modal-content animate" style="background-color:#1e376c">
+			<p> :) You might want to add something to the cart first </p> 
+	  	</div>
+	  </div>
+
     </body>
 </html>

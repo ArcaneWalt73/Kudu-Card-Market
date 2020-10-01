@@ -11,6 +11,15 @@ button
     border-radius: 10px;
 }
 
+.delete_btns
+{
+    padding: 10px 10px;
+    background-color: rgb(199, 168, 32);
+    border-radius: 10px;
+}
+
+
+
 #head_div
 {
     background-color: #1e376c;
