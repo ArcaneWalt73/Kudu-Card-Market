@@ -69,7 +69,7 @@ class register{
         }
     }
 }
-
+/*
 $user = new register($_POST["studentNumber"],$_POST["fname"],$_POST["lname"],$_POST["password"],$_POST["email"],$_POST["contact"]);
 if($user->doRegister()){
 	echo '<script>
@@ -82,4 +82,5 @@ if($user->doRegister()){
 	window.location.href = "../index.php"
 	</script>';
 }
+*/
 ?>
