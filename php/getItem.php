@@ -6,7 +6,7 @@ class getItem{
 	}
 
 	public function getMarketItems() {
-		this->database->query("select * from MARKET_NEW");
+		$this->database->query("select * from MARKET_NEW");
 		$result = $this->database->resultSet();
 		if ($result !== -1) {
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
