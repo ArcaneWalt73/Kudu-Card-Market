@@ -78,5 +78,11 @@ require_once 'php/helperFunctions.php';
             $this->assertEquals(0,$test->buyItem(20,1234));
             $this->assertEquals(1,$test->buyItem(13,1234));
         }
+      
+        public function testGetPurchHistory()
+        {
+            $helper = new HelperFunctions();
+            $this->assertEquals(18, $helper->getPurchHistory(1234)[0]['MARKET_ID']);
+        }
         
 }
