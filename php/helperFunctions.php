@@ -371,5 +371,52 @@ class HelperFunctions {
                                 return 0;
                 }
         }
+	
+	//Adds newly checked out items to the purchases table . row = array of columns to input
+        function addToPurch($studentNr, $row)
+        {
+                $id = $row['ID'];
+                $amount = $row['PRICE'];
+                $qty = $row['QTY'];
+                $name = $row['NAME'];
+                $url = $row['URL'];
+                $price = $row['PRICE'];
+                $cate = $row['CATEGORY'];
+                $desc = $row['DESCRIPTION'];
+
+                $sql = "INSERT INTO PURCHASES(
+                        STUDENT_NO, MARKET_ID, IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, PURCHASE_DATE)
+                        VALUES('$studentNr', '$id', '$url', '$name', '$price', '$cate', '$desc', CURRENT_DATE);";
+
+                $this->database->exec($sql);
+        }
+	
+	//gets the user's purchase history
+        function getPurchHistory($studentNr)
+        {
+                $output = array();
+                $this->database->query('select * from PURCHASES where STUDENT_NO='.$studentNr.';');
+                $result = $this->database->resultSet();
+                if($result !== -1)
+                {
+                        $output = $result->fetchAll();
+                }
+                return $output;
+        }
+
+	//gets the user's items in their cart
+        function getCartItems($studentNr)
+        {
+                $output = array();
+                $this->database->query('select * from CART where STUDENT_NO='.$studentNr.';');
+                $result = $this->database->resultSet();
+                if($result !== -1)
+                {
+                        $output = $result->fetchAll();
+                }
+                return $output;
+        }
+
+
 }
 ?>
