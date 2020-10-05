@@ -496,32 +496,7 @@ UNLOCK TABLES;
 -- Table structure for CART
 --
 
-DROP TABLE IF EXISTS `CART`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `CART` (
-  `STUDENT_NO` varchar(20) NOT NULL,
-  `MARKET_ID` int(11) unsigned NOT NULL,
-  `IMAGE_URL` text,
-  `NAME` varchar(30) NOT NULL,
-  `PRICE` decimal(6,2) NOT NULL,
-  `CATEGORY` varchar(30) NOT NULL,
-  `DESCRIPTION` text NOT NULL,
-  KEY `STUDENT_NO` (`STUDENT_NO`),
-  KEY `MARKET_ID` (`MARKET_ID`),
-  CONSTRAINT `CART_ibfk_1` FOREIGN KEY (`STUDENT_NO`) REFERENCES `STUDENTS` (`STUDENT_NO`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `PURCHASES`
---
-
-LOCK TABLES `CART` WRITE;
-/*!40000 ALTER TABLE `CART` DISABLE KEYS */;
-INSERT INTO `CART` VALUES ('1234',17,'https://lamp.ms.wits.ac.za/~s1965919/uploads/17.jpeg','SDD',100.00,'Stationary','Before you break'),('1234',17,'https://lamp.ms.wits.ac.za/~s1965919/uploads/17.jpeg','SDD',100.00,'Stationary','Before you break');
-/*!40000 ALTER TABLE `CART` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 
