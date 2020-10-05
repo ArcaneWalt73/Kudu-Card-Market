@@ -99,7 +99,7 @@ require_once 'php/helperFunctions.php';
                                 'NAME' => 'HP',
                                'URL' => 'https://lamp.ms.wits.ac.za/~s1965919/uploads/0.jpeg',
                                 'PRICE' => '3999.99',
-                                 'QTY' = '1',
+                                 'QTY' => '1',
                                 'CATEGORY' => 'Electronics',
                                'DESCRIPTION' => 'Operating SystemWindows 10 HomeProcessorCeleronProcessor TypeN4000Memory\r\n
                                                                     Type4 GB DDR4 SDRAMDisplay Size14\r\n
