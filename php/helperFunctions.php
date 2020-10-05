@@ -388,7 +388,11 @@ class HelperFunctions {
                         STUDENT_NO, MARKET_ID, IMAGE_URL, NAME, PRICE, CATEGORY, DESCRIPTION, PURCHASE_DATE)
                         VALUES('$studentNr', '$id', '$url', '$name', '$price', '$cate', '$desc', CURRENT_DATE);";
 
-                $this->database->exec($sql);
+                if($this->database->exec($sql))
+		{
+			return 0;	
+		}
+		return 1;
         }
 	
 	//gets the user's purchase history
