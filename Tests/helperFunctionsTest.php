@@ -94,8 +94,20 @@ require_once 'php/helperFunctions.php';
         public function testAddToPurch()
         {
             $helper = new HelperFunctions();
-            $row = $helper->getPurchHistory(1234)[0];
-            $row['ID'] = 1210;
+            $row =  array (
+                                'ID' => '1999',
+                                'NAME' => 'HP',
+                               'URL' => 'https://lamp.ms.wits.ac.za/~s1965919/uploads/0.jpeg',
+                                'PRICE' => '3999.99',
+                                 'QTY' = '1',
+                                'CATEGORY' => 'Electronics',
+                               'DESCRIPTION' => 'Operating SystemWindows 10 HomeProcessorCeleronProcessor TypeN4000Memory\r\n
+                                                                    Type4 GB DDR4 SDRAMDisplay Size14\r\n
+                                                                   "Storage64 GB eMMCGraphicsIntel? UHD Graphics 600WiFiIEEE 802.11acWarranty Period12\r\n
+                                                                    MonthsWeight1.65ColorBlueBluetoothYesRear CameraNoFront CameraYes',
+                               'DESCRIPTION' => 'Operating SystemWindows 10 HomeProcessorCeleronProcessor TypeN4000Memory Type4 GB DDR4 SDRAMDisplay Size14"Storage64 GB eMMCGraphicsIntel? UHD Graphics 600WiFiIEEE 802.11acWarranty Period12 MonthsWeight1.65ColorBlueBluetoothYesRear CameraNoFront CameraYes',
+                            )
+               
             $this->assertEquals(0, $helper->addToPurch(1234,$row));
         }
         
