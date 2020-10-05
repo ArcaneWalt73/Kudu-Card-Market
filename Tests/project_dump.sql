@@ -518,9 +518,9 @@ CREATE TABLE `CART` (
 --
 
 LOCK TABLES `CART` WRITE;
-/*!40000 ALTER TABLE `PURCHASES` DISABLE KEYS */;
+/*!40000 ALTER TABLE `CART` DISABLE KEYS */;
 INSERT INTO `CART` VALUES ('1234',17,'https://lamp.ms.wits.ac.za/~s1965919/uploads/17.jpeg','SDD',100.00,'Stationary','Before you break'),('1234',17,'https://lamp.ms.wits.ac.za/~s1965919/uploads/17.jpeg','SDD',100.00,'Stationary','Before you break');
-/*!40000 ALTER TABLE `PURCHASES` ENABLE KEYS */;
+/*!40000 ALTER TABLE `CART` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
