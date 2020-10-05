@@ -106,7 +106,7 @@ require_once 'php/helperFunctions.php';
                                                                    "Storage64 GB eMMCGraphicsIntel? UHD Graphics 600WiFiIEEE 802.11acWarranty Period12\r\n
                                                                     MonthsWeight1.65ColorBlueBluetoothYesRear CameraNoFront CameraYes',
                                'DESCRIPTION' => 'Operating SystemWindows 10 HomeProcessorCeleronProcessor TypeN4000Memory Type4 GB DDR4 SDRAMDisplay Size14"Storage64 GB eMMCGraphicsIntel? UHD Graphics 600WiFiIEEE 802.11acWarranty Period12 MonthsWeight1.65ColorBlueBluetoothYesRear CameraNoFront CameraYes',
-                            )
+                            );
                
             $this->assertEquals(0, $helper->addToPurch(1234,$row));
         }
