@@ -82,7 +82,7 @@ require_once 'php/helperFunctions.php';
         public function testGetPurchHistory()
         {
             $helper = new HelperFunctions();
-            $this->assertEquals(18, $helper->getPurchHistory(1234)[0]['MARKET_ID']);
+            $this->assertEquals(17, $helper->getPurchHistory(1234)[0]['MARKET_ID']);
         }
         
 }
