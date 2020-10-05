@@ -90,5 +90,13 @@ require_once 'php/helperFunctions.php';
             $helper = new HelperFunctions();
             $this->assertEquals(10, $helper->getCartItems(1234)[0]['MARKET_ID']);
         }
+      
+        public function testAddToPurch()
+        {
+            $helper = new HelperFunctions();
+            $row = $helper->getPurchHistory(1234)[0];
+            $row['ID'] = 1210;
+            $this->assertEquals(0, $helper->addToPurch(1234,$row));
+        }
         
 }
