@@ -172,7 +172,7 @@ if(isset($_POST['buy_btn'])) {
         			<input type="submit" name="buy_btn" value="BUY"/>
 			</form>
 		</div-->
-		<button onclick="showSnackbar()">ADD TO CART</button>
+		<button onclick="showSnackbar()" name="buy_btn" type="submit" formmethod="post">ADD TO CART</button>
 	</div>
 
 	<div id="snackbar"><p id="alert"></p></div>
@@ -247,15 +247,18 @@ if(isset($_POST['buy_btn'])) {
 	}
 }*/
 		var output = "<?php
-				if ($resp['code'] === 0) {
-					if ($helper->addToCart($id, $resp['name']) === 0) {
-						$response['QTY'] -= 1;
-						echo "0";
-					}
-					else
-						echo "1";
+				if (isset($_POST["buy_btn"])) {
+					if ($resp['code'] === 0) {
+						if ($helper->addToCart($id, $resp['name']) === 0) {
+							$response['QTY'] -= 1;
+							echo "0";
+						}
+						else
+							echo "1";
+					} else
+						echo "2";
 				} else
-					echo "2";
+					echo "3";
 				?>";
 		var message = "Please Login First";
 		console.log(output);
