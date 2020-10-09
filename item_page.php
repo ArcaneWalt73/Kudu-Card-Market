@@ -7,52 +7,11 @@ $helper = new HelperFunctions;
 #echo $name;
 $id = $_GET['id'];
 $response = $helper->getItemInfo($id);
-
+static $button_press = 0;
 $resp = getUserSession();
 
 if (isset($resp['name'])){$phpFile="./homepage.php";}else{$phpFile="./index.php";}
-
-function showSnackbar($message) {
-	echo "
-	<div id='snackbar'>
-		$message;
-		<script type='text/javascript'>
-			showSnackbar();
-		</script>
-	</div>
-	";
-}
-
-/*if ($e['ERROR'] === true)
-	if (isset($name))
-		header("location: ../homepage.php");
-	else
-		header("location: ../index.php");
-*/
-/*$message = "please login first";
-if(isset($_POST['buy_btn'])) { 
-	if ($resp['code'] === 0) {
-		showSnackbar("Hello ".$resp['name']);
-		#echo $resp['name'];
-		/*if ($helper->buyItem($id, $resp['name']) === 0)
-			$message = "Transaction Successfull";
-		else
-			$message = "Transaction Failed";
-		echo "
-			<script type='text/javascript'>
-				alert('$message');
-				window.location.replace('./homepage.php');
-			</script>" ;/
-	} else {
-		#echo "set user";
-		showSnackbar($message);
-		/echo "
-			<script type='text/javascript'>
-				alert('$message');
-				window.location.replace('./index.php');
-			</script>" ;*
-	}
-}*/
+//$resp['name']." ".$resp['code'];
 ?>
 
 <!DOCTYPE html>
@@ -81,6 +40,7 @@ if(isset($_POST['buy_btn'])) {
 	<link rel="stylesheet" type="text/css" href="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/css/snackbar.css">
 
 	
+	<script defer src="./jquery/jquery.min.js"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!--script src="https://lamp.ms.wits.ac.za/~s1965919/Kudu-Card-Market/js/snackbar.js"></script-->
@@ -134,156 +94,198 @@ if(isset($_POST['buy_btn'])) {
 	<img src="images/defaultIcon.jpg" style="dispay: inline-block;" width="44px" height="44px">
          
  
-        </div>	
-
-	
-
-        <div id = "name_div" class="item-title" >
-            <!--i class="fa fa-shopping-bag"></i--><h1 id="name"><?php echo $response['NAME'] ?></h1>
-            <!--a class="tablinks" onclick="main(event,'search')"><i class="fa fa-fw fa-search"></i> Search</a>
-            <a onclick="document.getElementById('login').style.display='block'" style="width:auto;">
-                <i class="fa fa-fw fa-user"></i> Login
-            </a>
-	    <div class="topnav-right">
-              <a class="tablinks"><i class="fas fa-user-alt"></i>Hello, User</a>
-            </div>
-            <div>
-              <span id="user-text">Hello, User</span>
-            </div-->
         </div>
-	<div id="price_div">
-	    <h4><?php echo 'R '.$response['PRICE']?><h4>
-	</div>
+			
+		<div>
+		<div class="item">
+			<img src="<?php echo $response['URL']; ?>" style="max-width:300px;max-height:280px;margin:10px">
+			<h1><?php echo $response['NAME']; ?></h1>
+			<p class="price"><?php echo 'R'.$response['PRICE']?></p>
+			<p><?php echo $response['DESCRIPTION']; ?></p>
+			<p>Available : <p id="qty"><?php echo $response['QTY']?></p></p>
+			<p><button onclick="showSnackbar()" id="buy_btn">Add to Cart</button></p>
+		</div>
+		<div class="reviews">
+			<span id="head" class="heading">User Rating</span>
+			<p id="ratingP"style="display:none"><?php echo $response['RATING']?></p>
+			<p id="bars" style="display:none">
+			<?php
+				for ($i=1; $i<6; $i = $i+1){
+					if(!isset($response[$i.''])){
+						$response[$i.''] = 0;
+					}
+				}
+				echo json_encode($response);
+			?></p>
+			<script>
+				var checked = parseInt(document.getElementById('ratingP').innerHTML);
+				var parenT = document.createElement('span');
+				parenT.setAttribute("style","margin-left:25px;");
+				for(var j=0; j<checked; j++){
+					var local = document.createElement("span");
+					local.setAttribute("class","fa fa-star checked");
+					parenT.appendChild(local);
+				}
+				var unChecked = 5-checked;
+				for(var j=0; j<unChecked; j++){
+					var local = document.createElement("span");
+					local.setAttribute("class","fa fa-star");
+					local.setAttribute("style","color:grey");
+					parenT.appendChild(local);;
+				}
+				document.getElementById("head").appendChild(parenT);
+				var numBars = JSON.parse(document.getElementById('bars').textContent);
+				var createReviewBars = function(numStars){
+					var percent = parseInt((numBars[numStars]/numBars['REVIEW'])*100);
+					return percent+"%";
+				};
+			</script>
+			<p><?php echo $response['RATING']?> average based on <?php echo $response['REVIEW']?> reviews.</p>
+			<hr style="border:3px solid #f1f1f1">
 
-	<div class="column">
-		<div id="image_div" class="card">
-			<img alt="Item image" id="image" width="500" height="400" src=<?php echo $response['URL']; ?>>;
+			<div class="row">
+				<div class="side">
+					<div>5 star</div>
+				</div>
+				<div class="middle">
+					<div id="star5" class="bar-container">
+						<script>
+							var bar = document.createElement('div');
+							bar.setAttribute("class","bar-5");
+							bar.setAttribute("style","width:"+createReviewBars(5));
+							document.getElementById('star5').appendChild(bar);
+						</script>
+					</div>
+				</div>
+				<div class="side right">
+					<div><?php echo $response[5]?></div>
+				</div>
+				<div class="side">
+					<div>4 star</div>
+				</div>
+				<div class="middle">
+					<div id="star4"class="bar-container">
+						<script>
+							var bar = document.createElement('div');
+							bar.setAttribute("class","bar-4");
+							bar.setAttribute("style","width:"+createReviewBars(4));
+							document.getElementById('star4').appendChild(bar);
+						</script>
+					</div>
+				</div>
+				<div class="side right">
+					<div><?php echo $response[4]?></div>
+				</div>
+				<div class="side">
+					<div>3 star</div>
+				</div>
+				<div class="middle">
+					<div id="star3" class="bar-container">
+						<script>
+							var bar = document.createElement('div');
+							bar.setAttribute("class","bar-3");
+							bar.setAttribute("style","width:"+createReviewBars(3));
+							document.getElementById('star3').appendChild(bar);
+						</script>
+					</div>
+				</div>
+				<div class="side right">
+					<div><?php echo $response[3]?></div>
+				</div>
+				<div class="side">
+					<div>2 star</div>
+				</div>
+				<div class="middle">
+					<div id ="star2" class="bar-container">
+						<script>
+							var bar = document.createElement('div');
+							bar.setAttribute("class","bar-2");
+							bar.setAttribute("style","width:"+createReviewBars(2));
+							document.getElementById('star2').appendChild(bar);
+						</script>
+					</div>
+				</div>
+				<div class="side right">
+					<div><?php echo $response[2]?></div>
+				</div>
+				<div class="side">
+					<div>1 star</div>
+				</div>
+				<div class="middle">
+					<div id="star1" class="bar-container">
+						<script>
+							var bar = document.createElement('div');
+							bar.setAttribute("class","bar-1");
+							bar.setAttribute("style","width:"+createReviewBars(1));
+							document.getElementById('star1').appendChild(bar);
+						</script>
+					</div>
+				</div>
+				<div class="side right">
+					<div><?php echo $response[1]?></div>
+				</div>
+			</div>
 		</div>
-		<div id="item_info" class="container">
-			<h6>DESCRIPTION</h6>
-			<p id="item_info"><?php echo $response['DESCRIPTION']?></p>
-		</div>
-		<div id="item_info" class='container'>
-			<h6>QTY:</h6>
-			<p id="qty"><?php echo $response['QTY']?></p>
-		</div>
-		<!--div id="item_info" class="container">
-			<form method="post"> 
-        			<input type="submit" name="buy_btn" value="BUY"/>
-			</form>
-		</div-->
-		<button onclick="showSnackbar()" name="buy_btn" type="submit" formmethod="post">ADD TO CART</button>
 	</div>
 
 	<div id="snackbar"><p id="alert"></p></div>
-
 	<script>
-		/*var options = window.location.search.slice(1)
-                      .split('&')
-                      .reduce(function _reduce (/*Object* a, /*String* b) {
-                        b = b.split('=');
-                        a[b[0]] = decodeURIComponent(b[1]);
-                        return a;
-                      }, {});
-		options = String(options);
-		console.log(options);
-		var opt = options.split("?");
-		console.log(opt[0]);
-		console.log(opt[1]);
-
-		var myData = JSON.parse(opt[1]);
-		var para = document.getElementById("name");
-		var img = document.getElementById("item_image");
-		var info = document.getElementById("item_info");
-		var price = document.getElementById("price");
-
-		para.innerText = myData['NAME'];
-		img.setAttribute("src", myData['IMAGE_URL']);
-		info.innerText = myData['DESCRIPTION'];
-		price.innerText = myData['PRICE'];*/
+		// Get the modal
+		var modal = document.getElementById('login');
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
 	</script>
 
-          <script>
-            // Get the modal
-            var modal = document.getElementById('login');
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-          </script>
-
 	<script>
-	/*
-	 * How to use:
-	 * Create a div element with id="snackbar" and message between tags
-	 * call showSnackbar() when you want to show it
-	 */
+		/*
+		* How to use:
+		* Create a div element with id="snackbar" and message between tags
+		* call showSnackbar() when you want to show it
+		*/
 
-	function showSnackbar () {
-/*$message = "please login first";
-if(isset($_POST['buy_btn'])) { 
-	if ($resp['code'] === 0) {
-		showSnackbar("Hello ".$resp['name']);
-		#echo $resp['name'];
-		/*if ($helper->buyItem($id, $resp['name']) === 0)
-			$message = "Transaction Successfull";
-		else
-			$message = "Transaction Failed";
-		echo "
-			<script type='text/javascript'>
-				alert('$message');
-				window.location.replace('./homepage.php');
-			</script" ;/
-	} else {
-		#echo "set user";
-		showSnackbar($message);
-		/echo "
-			<script type='text/javascript'>
-				alert('$message');
-				window.location.replace('./index.php');
-			</scrip>" ;*
-	}
-}*/
-		var output = "<?php
-				if (isset($_POST["buy_btn"])) {
-					if ($resp['code'] === 0) {
-						if ($helper->addToCart($id, $resp['name']) === 0) {
-							$response['QTY'] -= 1;
-							echo "0";
-						}
-						else
-							echo "1";
-					} else
-						echo "2";
-				} else
-					echo "3";
-				?>";
-		var message = "Please Login First";
-		console.log(output);
-		if (output == "0")
-			message = "Successfully Added To Cart";
-		else if (output == "1")
-			message = "Unable To Add To Cart";
+		function showSnackbar () {	
+			var item_id = <?php echo $id ?>;
+			var studentNo = <?php echo $resp['name'] ?>;
+			var code = <?php echo $resp['code'] ?>;
+			var qty = document.getElementById("qty").innerText;
+			$.post (
+				'./php/addItemToCart.php',
+				{"MARKET_ID":item_id, 
+				"STUDENT_ID":studentNo,
+				"QTY":qty,
+				"CODE":code},
+				function(data) {
+					console.log(data);
+					//alert("Data : "+data);
+					var output = JSON.parse(data);
 
-		var x = document.getElementById("snackbar");
-		var a = document.getElementById("alert");
-		var q = document.getElementById("qty");		
-
-		a.innerText = message;
-		x.className = "show";
-		q.innerText = "<?php
-				echo $response['QTY'];
-				?>";
-		console.log(q.innerText);
-
-		setTimeout(
-			function (){
-				x.className = x.className.replace("show", "");
-			}, 3000
-		);
-	}
+					var message = "Please Login First";
+					var x = document.getElementById("snackbar");
+					var a = document.getElementById("alert");
+					var q = document.getElementById("qty");
+					if (output.error == 0) {
+						message = "Successfully Added To Cart";
+					} else if (output.error == 1) {
+						message = "Unable To Add To Cart";
+					}
+					
+					a.innerText = message;
+					x.className = "show";
+					q.innerText = output.qty;
+					console.log(data);
+					setTimeout(
+						function (){
+							x.className = x.className.replace("show", "");
+						}, 3000
+					)
+					//window.open("item_info.php", "self");
+				}
+			)
+		}
 	</script>
 
 
@@ -310,3 +312,4 @@ if(isset($_POST['buy_btn'])) {
 
 </body>
 </html>
+
