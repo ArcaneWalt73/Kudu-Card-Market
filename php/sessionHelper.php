@@ -1,7 +1,7 @@
 <?php
-
+session_start()
 function getUserSession() {
-	session_start();
+	//session_start();
 	$response = array();
 	if (isset($_SESSION['login_user'])) {
 		$response['name'] = $_SESSION['login_user'];
@@ -44,10 +44,10 @@ function checkUserSession($user_check) {
 function updateSession($user_check) {
 	$value = checkUserSession($user_check);
 	if ($value === 2) {
-		session_start();
+		//session_start();
 		return (2);
 	} else if ($value === 1) {
-		session_start();
+		//session_start();
 
 		$_SESSION['login_user'] = $user_check;
 		return (0);
