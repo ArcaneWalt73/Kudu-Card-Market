@@ -20,8 +20,6 @@ class getItem{
 				
 				if (empty($rating))
 					$row['RATING'] = 0;
-				else
-					$row['RATING'] = $rating;
 				$output[] = $row;
 			}
 			return json_encode($output);
