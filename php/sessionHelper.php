@@ -54,11 +54,4 @@ function updateSession($user_check) {
 	}
 	return (1);
 }
-/*
- * Function to close user session
- */
-function cancelSession() {
-	session_destroy();
-	return 0;
-}
 ?>
