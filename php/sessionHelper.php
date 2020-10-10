@@ -59,5 +59,6 @@ function updateSession($user_check) {
  */
 function cancelSession() {
 	session_destroy();
+	return 0;
 }
 ?>
