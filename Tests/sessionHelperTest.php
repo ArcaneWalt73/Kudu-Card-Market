@@ -1,5 +1,5 @@
 <?php
-require 'php/sessionHelper.php';
+require_once('php/sessionHelper.php');
 
   class sessionHelperTest extends PHPUnit\Framework\TestCase {
       public function testGetUserSession(){
