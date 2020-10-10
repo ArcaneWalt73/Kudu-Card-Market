@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 function getUserSession() {
 	//session_start();
 	$response = array();
