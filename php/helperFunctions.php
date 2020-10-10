@@ -24,22 +24,22 @@ class Database2 {
     }
 
     public function query($sql){
-        try{
+        //try{
             $this->stmt = $this->db->query($sql);
-        }catch(PDOException $e){
+        /*}catch(PDOException $e){
 	    $m = $e->getMessage();
 #	    echo '</br>'.$m.'</br>';
             $this->stmt = -1;
-        }
+        }*/
     }
     public function exec($sql) {
-	try {
+	//try {
 		$this->stmt = $this->db->exec($sql);
-	}catch(PDOException $e){
+	/*}catch(PDOException $e){
 	    $m = $e->getMessage();
 #	    echo '</br>'.$m.'</br>';
             $this->stmt = -1;
-        }
+        }*/
     }
 
     public function resultSet(){
