@@ -28,8 +28,8 @@ require_once('php/sessionHelper.php');
           $user = 'davis';
           $this->assertEquals(1,updateSession($user));
       }
-      public function testCancelSession(){
-          $this->assertEquals(0,cancelSession());
-      }
+      //public function testCancelSession(){
+        //  $this->assertEquals(0,cancelSession());
+      //}
 
   }
