@@ -92,9 +92,7 @@ class HelperFunctions {
                         //$response['REVIEWS'] = $data['REVIEWS'];
                         $response['ERROR'] = false;
                         return $response;
-                } else
-                        $response['ERROR'] = true;
-                return $response;
+                } 
         }
 
         /*
@@ -122,9 +120,7 @@ class HelperFunctions {
                         $response['DESCRIPTION'] = $dataResult['DESCRIPTION'];
                         $response['ERROR'] = false;
                         return $response;
-                } else
-                        $response['ERROR'] = true;
-                return $response;
+                }
         }
 
         /*
@@ -159,7 +155,6 @@ class HelperFunctions {
                         //response array
                         return $items;
                 }
-                return -1;
         }
 
         /*
