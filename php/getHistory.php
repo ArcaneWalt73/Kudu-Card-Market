@@ -1,12 +1,12 @@
 <?php
-
-include("helperFunctions.php");
-
 session_start();
-$studentNo = $_SESSION['login_user'];
+require_once("helperFunctions.php");
 
-$helper = new HelperFunctions;
-	
-$output = $helper->getPurchHistory($studentNo);
-echo json_encode($output);
+function getHistory(){
+	$studentNo = $_SESSION['login_user'];
+	$helper = new HelperFunctions;
+		
+	$output = $helper->getPurchHistory($studentNo);
+	return json_encode($output);
+}
 ?>
