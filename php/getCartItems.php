@@ -1,13 +1,14 @@
 <?php
-include("helperFunctions.php");
-
 session_start();
-$studentNo = $_SESSION['login_user'];
+require("helperFunctions.php");
+function getcartItems(){
+	$studentNo = $_SESSION['login_user'];
 
-$helper = new HelperFunctions;
+	$helper = new HelperFunctions;
 
-$output = $helper->getCartItems($studentNo);
-echo json_encode($output);
+	$output = $helper->getCartItems($studentNo);
+	return json_encode($output);
+}
 ?>
 
 	
