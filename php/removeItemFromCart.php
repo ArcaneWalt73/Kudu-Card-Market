@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("helperFunctions.php");
+require_once("php/helperFunctions.php");
 
 function removeItemFromCart($id){
 	$username = "root";
