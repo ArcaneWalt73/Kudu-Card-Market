@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require("helperFunctions.php");
 function getcartItems(){
 	$studentNo = $_SESSION['login_user'];
