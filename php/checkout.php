@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('helperFunctions.php');
+require_once('helperFunctions.php');
 
 function checkOut(){
 	$username = "root";
@@ -37,7 +37,7 @@ function checkOut(){
 			$output[] = "updated balace";
 		}	
 	}
-
+	session_destroy();
 	return json_encode($output);
 }
 ?>
