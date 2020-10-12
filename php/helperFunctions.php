@@ -47,9 +47,9 @@ class Database2 {
 
     }
 
-    public function close() {
-	$this->stmt->closeCursor();
-    }
+    //public function close() {
+	//$this->stmt->closeCursor();
+    //}
 }
 
 class HelperFunctions {
