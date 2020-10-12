@@ -5,7 +5,7 @@ require_once('php/checkout.php');
       function testCheckOut(){
           $_SESSION['login_user'] = '1173';
           $_POST['NEW_BAL'] = 10000-3999.99;
-          $result[] = "updated balace";
+          $result = Array("updated balace","updated balace","updated balace","updated balace","updated balace");
           $this->assertEquals(json_encode($result),checkOut());
       }
   }
