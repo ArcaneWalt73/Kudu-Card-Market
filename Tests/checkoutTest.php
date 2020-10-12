@@ -1,5 +1,5 @@
 <?php
-require 'php/checkout.php';
+require_once('php/checkout.php');
 
   class checkoutTest extends PHPUnit\Framework\TestCase {
       function testCheckOut(){
