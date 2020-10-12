@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 //require_once('helperFunctions.php');
 
 function checkOut(){
@@ -37,7 +37,6 @@ function checkOut(){
 			$output[] = "updated balace";
 		}	
 	}
-	session_destroy();
 	return json_encode($output);
 }
 ?>
