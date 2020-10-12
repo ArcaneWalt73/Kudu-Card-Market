@@ -1,6 +1,6 @@
 <?php
-session_start();
-require("helperFunctions.php");
+//session_start();
+//require("helperFunctions.php");
 function getcartItems(){
 	$studentNo = $_SESSION['login_user'];
 
