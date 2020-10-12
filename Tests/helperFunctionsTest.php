@@ -10,7 +10,7 @@ require_once 'php/helperFunctions.php';
                                         'PRICE' => '3999.99',
                                         'CATEGORY' => 'Electronics',
                                         'DESCRIPTION' => 'Operating SystemWindows 10 HomeProcessorCeleronProcessor TypeN4000Memory Type4 GB DDR4 SDRAMDisplay Size14"Storage64 GB eMMCGraphicsIntel? UHD Graphics 600WiFiIEEE 802.11acWarranty Period12 MonthsWeight1.65ColorBlueBluetoothYesRear CameraNoFront CameraYes',
-                                        'QTY'=>'5','ERROR'=>false)
+                                        'QTY'=>'8','ERROR'=>false)
                             );
             $expectedHelperFunctions = $this->getMockBuilder('HelperFunctions')->getMock();
             $expectedHelperFunctions->method('getItemInfo')->will($this->returnValue($expectedResult));
