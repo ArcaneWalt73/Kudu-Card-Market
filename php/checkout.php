@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('helperFunctions.php');
+//require_once('helperFunctions.php');
 
 function checkOut(){
 	$username = "root";
